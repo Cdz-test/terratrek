@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerraTrek - L'Aventure en Pleine Nature</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#1a2e26',
+                            green: '#2d4a3e',
+                            sage: '#8f9e8a',
+                            sand: '#e6dfd3',
+                            orange: '#d97706'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e6dfd3;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d4a3e;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1a2e26;
+        }
+        
+        .gsap-reveal, .gsap-hero-el, .dest-card, .feature-item, .stat-item {
+            visibility: hidden;
+        }
+    </style>
+    <meta name="description" content="TerraTrek - L'Aventure en Pleine Nature">
+</head>
+<body class="bg-brand-sand text-brand-dark font-sans antialiased selection:bg-brand-orange selection:text-white overflow-x-hidden">
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="./" class="text-2xl font-serif font-bold text-white tracking-wider flex items-center gap-2" data-index-id="692632c212ede531b2821c4d" id="index-link">
+                <i class="fa-solid fa-mountain-sun"></i> TerraTrek
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#destinations" class="nav-link text-white/90 hover:text-brand-orange transition font-medium">Destinations</a>
+                <a href="./" class="nav-link text-white/90 hover:text-brand-orange transition font-medium" data-index-id="692632c212ede531b2821c4d" id="index-link">Expériences</a>
+                <a href="#guides" class="nav-link text-white/90 hover:text-brand-orange transition font-medium">Guides</a>
+                <a href="#" class="nav-link text-white/90 hover:text-brand-orange transition font-medium">Journal</a>
+                <a href="#contact" class="bg-brand-orange hover:bg-orange-700 text-white px-6 py-2 rounded-full font-semibold transition shadow-lg transform hover:scale-105">
+                    Réserver
+                </a>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden text-white text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-brand-dark/95 backdrop-blur-md p-6 md:hidden shadow-xl origin-top">
+            <div class="flex flex-col space-y-4">
+                <a href="#destinations" class="text-white hover:text-brand-orange">Destinations</a>
+                <a href="#experiences" class="text-white hover:text-brand-orange">Expériences</a>
+                <a href="#guides" class="text-white hover:text-brand-orange">Guides</a>
+                <a href="#contact" class="bg-brand-orange text-center text-white py-3 rounded-lg">Réserver</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img id="hero-bg" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHwyfHxtb3VudGFpbnxlbnwwfDB8fHwxNzY0MTExMDc5fDA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" alt="Montagne" class="w-full h-full object-cover scale-110">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-brand-sand"></div>
+        </div>
+
+        <div class="relative z-10 container mx-auto px-6 text-center text-white mt-16">
+            <span class="gsap-hero-el inline-block py-1 px-3 border border-white/30 rounded-full text-sm uppercase tracking-widest mb-4">
+                Explorez l'Inconnu
+            </span>
+            <h1 class="gsap-hero-el text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 leading-tight">
+                L'Appel des <br><span class="text-brand-orange italic">Sommets</span>
+            </h1>
+            <p class="gsap-hero-el text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-10">
+                Découvrez des sentiers inexplorés, respirez l'air pur des altitudes et reconnectez-vous avec la nature sauvage. Votre prochaine aventure commence ici.
+            </p>
+            <div class="gsap-hero-el flex flex-col md:flex-row gap-4 justify-center">
+                <a href="#destinations" class="bg-brand-orange hover:bg-orange-700 text-white px-8 py-4 rounded-full font-bold transition shadow-lg hover:shadow-orange-500/30 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-person-hiking"></i> Découvrir les Parcours
+                </a>
+                <a href="#video" class="bg-white/10 backdrop-blur-sm border border-white/30 hover:bg-white/20 text-white px-8 py-4 rounded-full font-bold transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-play"></i> Voir la Vidéo
+                </a>
+            </div>
+        </div>
+
+        <div id="scroll-indicator" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-brand-dark opacity-0">
+            <i class="fa-solid fa-arrow-down text-2xl"></i>
+        </div>
+    </header>
+
+    <section class="bg-brand-green text-white py-12 -mt-2 relative z-20 rounded-t-3xl md:rounded-none shadow-2xl">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
+                <div class="p-2 stat-item">
+                    <div class="text-4xl font-bold text-brand-orange mb-1 flex justify-center"><span class="counter" data-target="500">0</span>+</div>
+                    <div class="text-sm text-gray-300 uppercase tracking-wide">Sentiers Balisés</div>
+                </div>
+                <div class="p-2 stat-item">
+                    <div class="text-4xl font-bold text-brand-orange mb-1 flex justify-center"><span class="counter" data-target="12">0</span>k</div>
+                    <div class="text-sm text-gray-300 uppercase tracking-wide">Randonneurs Heureux</div>
+                </div>
+                <div class="p-2 stat-item">
+                    <div class="text-4xl font-bold text-brand-orange mb-1 flex justify-center"><span class="counter" data-target="50">0</span></div>
+                    <div class="text-sm text-gray-300 uppercase tracking-wide">Guides Certifiés</div>
+                </div>
+                <div class="p-2 stat-item">
+                    <div class="text-4xl font-bold text-brand-orange mb-1 flex justify-center"><span class="counter" data-target="100">0</span>%</div>
+                    <div class="text-sm text-gray-300 uppercase tracking-wide">Nature Pure</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="destinations" class="py-20 bg-brand-sand">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div class="max-w-xl gsap-reveal">
+                    <h4 class="text-brand-orange font-bold uppercase tracking-widest mb-2">Destinations Phares</h4>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-brand-dark">Choisissez votre prochain défi</h2>
+                </div>
+                <a href="#" class="hidden md:flex items-center gap-2 text-brand-green font-bold hover:text-brand-orange transition mt-4 md:mt-0 gsap-reveal">
+                    Voir toutes les destinations <i class="fa-solid fa-arrow-right-long"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="dest-card group relative overflow-hidden rounded-2xl shadow-xl cursor-pointer h-[500px]">
+                    <img src="https://images.unsplash.com/photo-1554629947-334ff61d85dc?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHwxfHxtb3VudGFpbnxlbnwwfDF8fHwxNzY0MTExNTY5fDA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" alt="Alpes" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>
+                    <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold border border-white/30">
+                        Difficile
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-8 w-full transform translate-y-4 group-hover:translate-y-0 transition duration-500">
+                        <h3 class="text-2xl font-serif font-bold text-white mb-2">Le Mont Blanc</h3>
+                        <div class="flex items-center gap-4 text-gray-300 text-sm mb-4 opacity-0 group-hover:opacity-100 transition duration-500 delay-100">
+                            <span><i class="fa-regular fa-clock mr-1"></i> 5 Jours</span>
+                            <span><i class="fa-solid fa-route mr-1"></i> 60 km</span>
+                        </div>
+                        <p class="text-gray-300 line-clamp-2 mb-4 opacity-0 group-hover:opacity-100 transition duration-500 delay-200">
+                            Une aventure épique à travers les plus hauts sommets d'Europe. Panoramas inoubliables garantis.
+                        </p>
+                        <a href="LeMontBlanc" class="text-brand-orange font-bold uppercase text-sm tracking-wider hover:text-white transition" data-page-id="693c3357f8f4d3dfd91f2fbc" id="page-link">Explorer <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="dest-card group relative overflow-hidden rounded-2xl shadow-xl cursor-pointer h-[500px] md:-mt-8">
+                    <img src="https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHwzfHxtb3VudGFpbnxlbnwwfDF8fHwxNzY0MTExNTY5fDA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" alt="Corse" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>
+                    <div class="absolute top-4 right-4 bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold border border-white/30">
+                        Expert
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-8 w-full transform translate-y-4 group-hover:translate-y-0 transition duration-500">
+                        <h3 class="text-2xl font-serif font-bold text-white mb-2">GR20, Corse</h3>
+                        <div class="flex items-center gap-4 text-gray-300 text-sm mb-4 opacity-0 group-hover:opacity-100 transition duration-500 delay-100">
+                            <span><i class="fa-regular fa-clock mr-1"></i> 15 Jours</span>
+                            <span><i class="fa-solid fa-route mr-1"></i> 180 km</span>
+                        </div>
+                        <p class="text-gray-300 line-clamp-2 mb-4 opacity-0 group-hover:opacity-100 transition duration-500 delay-200">
+                            Le sentier le plus mythique d'Europe. Traversez l'île de beauté du nord au sud.
+                        </p>
+                        <a href="GR20-Corse" class="text-brand-orange font-bold uppercase text-sm tracking-wider hover:text-white transition" data-page-id="693bfc5ee7b7125401d67ba3" id="page-link">Explorer <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+
+                <div class="dest-card group relative overflow-hidden rounded-2xl shadow-xl cursor-pointer h-[500px]">
+                    <img src="https://images.unsplash.com/photo-1501786223405-6d024d7c3b8d?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHw2fHxtb3VudGFpbnxlbnwwfDF8fHwxNzY0MTExNTY5fDA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" alt="Pyrénées" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-90"></div>
+                    <div class="absolute top-4 right-4 bg-brand-green text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Moyen
+                    </div>
+                    <div class="absolute bottom-0 left-0 p-8 w-full transform translate-y-4 group-hover:translate-y-0 transition duration-500">
+                        <h3 class="text-2xl font-serif font-bold text-white mb-2">Lacs des Pyrénées</h3>
+                        <div class="flex items-center gap-4 text-gray-300 text-sm mb-4 opacity-0 group-hover:opacity-100 transition duration-500 delay-100">
+                            <span><i class="fa-regular fa-clock mr-1"></i> 3 Jours</span>
+                            <span><i class="fa-solid fa-route mr-1"></i> 35 km</span>
+                        </div>
+                        <p class="text-gray-300 line-clamp-2 mb-4 opacity-0 group-hover:opacity-100 transition duration-500 delay-200">
+                            Découvrez des lacs cristallins nichés au cœur des montagnes verdoyantes. Idéal pour la photo.
+                        </p>
+                        <a href="Lac-Pyrénées" class="text-brand-orange font-bold uppercase text-sm tracking-wider hover:text-white transition" data-page-id="693cab295f2be4fcc1da73de" id="page-link">Explorer <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center md:hidden">
+                <a href="#" class="inline-block bg-white border border-brand-dark text-brand-dark px-6 py-3 rounded-full font-bold">Voir tout</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="experiences" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 gsap-reveal">
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-dark mb-4">Pourquoi partir avec TerraTrek ?</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Nous ne vendons pas seulement des randonnées, nous créons des souvenirs impérissables avec une sécurité maximale et un respect total de l'environnement.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 h-auto md:h-[600px]">
+                <div class="feature-item md:col-span-1 md:row-span-2 bg-brand-green rounded-3xl p-8 flex flex-col justify-between relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-10 -mt-10 transition group-hover:scale-150 duration-700"></div>
+                    <div class="relative z-10">
+                        <div class="w-12 h-12 bg-brand-orange rounded-xl flex items-center justify-center text-white text-xl mb-6 transform group-hover:rotate-12 group-hover:scale-110 transition duration-500">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-4 transform group-hover:translate-x-2 transition duration-300">Éco-Responsable</h3>
+                        <p class="text-gray-300 transform group-hover:translate-x-1 transition duration-300">Nous nous engageons à laisser les sentiers plus propres que nous ne les avons trouvés. 1% de nos revenus est reversé à la préservation des parcs nationaux.</p>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1545333212-ffebc7933c12?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHwyfHxjb21wb3N0fGVufDB8MHx8fDE3NjQxMTE2OTF8MA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" class="mt-6 rounded-xl opacity-80 group-hover:opacity-100 group-hover:scale-105 transition duration-500" alt="Eco">
+                </div>
+
+                <div class="feature-item bg-brand-sand rounded-3xl p-8 flex flex-col justify-center hover:shadow-lg transition duration-300 transform hover:-translate-y-2">
+                    <i class="fa-solid fa-shield-halved text-4xl text-brand-dark mb-4"></i>
+                    <h3 class="text-xl font-bold text-brand-dark mb-2">Sécurité Avant Tout</h3>
+                    <p class="text-gray-600 text-sm">Guides formés aux premiers secours et équipement GPS de pointe pour chaque groupe.</p>
+                </div>
+
+                <div class="feature-item bg-gray-100 rounded-3xl p-8 flex flex-col justify-center hover:shadow-lg transition duration-300 transform hover:-translate-y-2">
+                    <i class="fa-solid fa-users-viewfinder text-4xl text-brand-orange mb-4"></i>
+                    <h3 class="text-xl font-bold text-brand-dark mb-2">Petits Groupes</h3>
+                    <p class="text-gray-600 text-sm">Maximum 8 personnes par guide pour une expérience intime et personnalisée.</p>
+                </div>
+
+                <div class="feature-item md:col-span-2 bg-brand-dark rounded-3xl p-8 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden group">
+                    <div class="flex-1 relative z-10">
+                        <h3 class="text-2xl font-bold text-white mb-2 transform group-hover:translate-x-2 transition duration-300">Équipement Pro Inclus</h3>
+                        <p class="text-gray-400 mb-6 transform group-hover:translate-x-1 transition duration-300">Ne vous souciez pas du matériel. Tentes ultralégères, sacs de couchage thermiques et bâtons de marche sont fournis.</p>
+                        <a href="Equipement" class="text-brand-orange font-bold hover:text-white transition inline-flex items-center group-hover:translate-x-2 transform duration-300" data-page-id="693c9e367b80a46e143cbb02" id="page-link">Voir la liste du matériel <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                    </div>
+                    <div class="flex-1">
+                        <img src="https://images.unsplash.com/photo-1493244040629-496f6d136cc4?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHw3fHxlcXVpcG1lbnR8ZW58MHwwfHx8MTc2NDExMTYxNXww&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" class="rounded-xl shadow-2xl transform md:rotate-3 group-hover:rotate-0 group-hover:scale-105 transition duration-500" alt="Gear">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative py-32 bg-fixed bg-cover bg-center overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1480497490787-505ec076689f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHwxfHxtb3VudGFpbnxlbnwwfDB8fHwxNzY0MTExMDc5fDA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080');">
+        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="relative z-10 container mx-auto px-6 text-center">
+            <div class="quote-content opacity-0 translate-y-10">
+                <i class="fa-solid fa-quote-left text-4xl text-brand-orange mb-6 opacity-80"></i>
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-white leading-snug max-w-4xl mx-auto mb-8">
+                    "Dans chaque promenade avec la nature, on reçoit bien plus que ce que l'on cherche."
+                </h2>
+                <p class="text-xl text-gray-300 font-serif italic">- John Muir</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-brand-sand">
+        <div class="container mx-auto px-6">
+            <div id="newsletter-box" class="bg-brand-green rounded-3xl p-10 md:p-16 text-center relative overflow-hidden shadow-2xl opacity-0 scale-90">
+                <div class="absolute top-0 left-0 w-64 h-64 bg-white/5 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+                <div class="absolute bottom-0 right-0 w-64 h-64 bg-brand-orange/10 rounded-full translate-x-1/2 translate-y-1/2"></div>
+                
+                <div class="relative z-10 max-w-2xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Prêt pour l'aventure ?</h2>
+                    <p class="text-gray-300 mb-8">Rejoignez notre communauté de 50 000 randonneurs. Recevez nos guides secrets et offres exclusives.</p>
+                    
+                    <form class="flex flex-col md:flex-row gap-4" onsubmit="event.preventDefault();">
+                        <input type="email" placeholder="Votre adresse email" class="flex-1 px-6 py-4 rounded-full bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:bg-white/20 focus:border-brand-orange transition">
+                        <button type="submit" class="bg-brand-orange hover:bg-orange-600 text-white px-8 py-4 rounded-full font-bold shadow-lg transition transform hover:scale-105">
+                            S'inscrire
+                        </button>
+                    </form>
+                    <p class="text-xs text-gray-400 mt-4">Pas de spam, promis. Désabonnement à tout moment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-brand-dark text-white pt-20 pb-10 border-t border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-1 footer-col opacity-0">
+                    <a href="#" class="text-2xl font-serif font-bold text-white tracking-wider flex items-center gap-2 mb-6">
+                        <i class="fa-solid fa-mountain-sun text-brand-orange"></i> TerraTrek
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Agence de randonnée premium spécialisée dans les expériences authentiques et durables à travers le monde.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-orange transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-orange transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-orange transition"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col opacity-0">
+                    <h4 class="text-lg font-bold mb-6 text-brand-sand">Explorer</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-brand-orange transition">Nos Destinations</a></li>
+                        <li><a href="Guides-Experts" class="hover:text-brand-orange transition" data-page-id="693ca87b5f2be4fcc1da48ea" id="page-link">Guides Experts</a></li>
+                        <li><a href="difficiulté" class="hover:text-brand-orange transition" data-page-id="699cf2adf56a95afe90fd6e8" id="page-link">Niveaux de Difficulté</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Blog Aventure</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col opacity-0">
+                    <h4 class="text-lg font-bold mb-6 text-brand-sand">Entreprise</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-brand-orange transition">À Propos</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Carrières</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Presse</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col opacity-0">
+                    <h4 class="text-lg font-bold mb-6 text-brand-sand">Contact</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot mt-1 text-brand-orange"></i>
+                            <span>123 Avenue des Cimes,<br>74400 Chamonix, France</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-brand-orange"></i>
+                            <span>+33 4 50 50 50 50</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-brand-orange"></i>
+                            <span>bonjour@terratrek.fr</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+                <p>© 2025 TerraTrek. Tous droits réservés.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition">Mentions Légales</a>
+                    <a href="#" class="hover:text-white transition">Confidentialité</a>
+                    <a href="#" class="hover:text-white transition">CGV</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const nav = document.getElementById('navbar');
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.remove('bg-transparent', 'py-4');
+                nav.classList.add('bg-brand-dark/90', 'backdrop-blur-md', 'py-2', 'shadow-lg');
+            } else {
+                nav.classList.add('bg-transparent', 'py-4');
+                nav.classList.remove('bg-brand-dark/90', 'backdrop-blur-md', 'py-2', 'shadow-lg');
+            }
+        });
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            const icon = btn.querySelector('i');
+            if (menu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+                gsap.fromTo("#mobile-menu", {scaleY: 0, opacity: 0}, {scaleY: 1, opacity: 1, duration: 0.3, ease: "power2.out"});
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const heroTl = gsap.timeline();
+            
+            heroTl.to("#hero-bg", {
+                scale: 1,
+                duration: 10,
+                ease: "power1.inOut"
+            }, 0);
+
+            heroTl.fromTo(".gsap-hero-el", 
+                { y: 50, autoAlpha: 0 },
+                { y: 0, autoAlpha: 1, duration: 1, stagger: 0.2, ease: "power3.out" },
+                0.5
+            );
+
+            heroTl.to("#scroll-indicator", {
+                y: 10,
+                autoAlpha: 1,
+                duration: 1,
+                yoyo: true,
+                repeat: -1,
+                ease: "power1.inOut"
+            }, 2);
+
+            gsap.to("#hero-bg", {
+                yPercent: 30,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "header",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+
+            gsap.utils.toArray(".stat-item").forEach((item, i) => {
+                gsap.fromTo(item, 
+                    { y: 30, autoAlpha: 0 },
+                    { 
+                        y: 0, 
+                        autoAlpha: 1, 
+                        duration: 0.8,
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 85%",
+                            end: "top 50%",
+                            scrub: 1,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+
+            gsap.utils.toArray(".counter").forEach(counter => {
+                const target = counter.getAttribute("data-target");
+                gsap.to(counter, {
+                    innerText: target,
+                    duration: 2,
+                    snap: { innerText: 1 },
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: counter,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                });
+            });
+
+            gsap.utils.toArray(".gsap-reveal").forEach((el) => {
+                gsap.fromTo(el, 
+                    { y: 30, autoAlpha: 0 },
+                    { 
+                        y: 0, 
+                        autoAlpha: 1, 
+                        duration: 0.8,
+                        scrollTrigger: { 
+                            trigger: el, 
+                            start: "top 75%",
+                            end: "top 40%",
+                            scrub: 1,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+
+            gsap.utils.toArray(".dest-card").forEach((card, i) => {
+                gsap.fromTo(card, 
+                    { y: 100, autoAlpha: 0 },
+                    { 
+                        y: 0, 
+                        autoAlpha: 1, 
+                        duration: 1,
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top 80%",
+                            end: "top 40%",
+                            scrub: 1.5,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+
+            gsap.utils.toArray(".feature-item").forEach((item, i) => {
+                gsap.fromTo(item,
+                    { scale: 0.9, autoAlpha: 0, y: 50 },
+                    {
+                        scale: 1,
+                        autoAlpha: 1,
+                        y: 0,
+                        duration: 0.8,
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 85%",
+                            end: "top 45%",
+                            scrub: 1.2,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+
+            gsap.fromTo(".quote-content", 
+                { y: 30, autoAlpha: 0 },
+                {
+                    y: 0,
+                    autoAlpha: 1,
+                    duration: 1.5,
+                    scrollTrigger: {
+                        trigger: ".quote-content",
+                        start: "top 75%",
+                        end: "top 35%",
+                        scrub: 1,
+                        toggleActions: "play reverse play reverse"
+                    }
+                }
+            );
+
+            gsap.fromTo("#newsletter-box",
+                { scale: 0.9, autoAlpha: 0 },
+                {
+                    scale: 1,
+                    autoAlpha: 1,
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: "#newsletter-box",
+                        start: "top 80%",
+                        end: "top 40%",
+                        scrub: 1.5,
+                        toggleActions: "play reverse play reverse"
+                    }
+                }
+            );
+
+            gsap.utils.toArray(".footer-col").forEach((col, i) => {
+                gsap.fromTo(col,
+                    { autoAlpha: 0, y: 30 },
+                    {
+                        autoAlpha: 1,
+                        y: 0,
+                        duration: 0.8,
+                        scrollTrigger: {
+                            trigger: col,
+                            start: "top 90%",
+                            end: "top 60%",
+                            scrub: 1,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+        });
+    </script>
+</body>
+</html>
