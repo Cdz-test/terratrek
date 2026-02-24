@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Mont Blanc - TerraTrek</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#1a2e26',
+                            green: '#2d4a3e',
+                            sage: '#8f9e8a',
+                            sand: '#e6dfd3',
+                            orange: '#d97706'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e6dfd3;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d4a3e;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1a2e26;
+        }
+        
+        .gsap-reveal, .gsap-hero-el, .itinerary-item, .gallery-item {
+            visibility: hidden;
+        }
+    </style>
+    <meta name="description" content="TerraTrek - L'Aventure en Pleine Nature">
+</head>
+<body class="bg-brand-sand text-brand-dark font-sans antialiased selection:bg-brand-orange selection:text-white overflow-x-hidden">
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="./" class="text-2xl font-serif font-bold text-white tracking-wider flex items-center gap-2" data-index-id="692632c212ede531b2821c4d" id="index-link">
+                <i class="fa-solid fa-mountain-sun"></i> TerraTrek
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="./#destinations" class="nav-link text-white/90 hover:text-brand-orange transition font-medium">Destinations</a>
+                <a href="./#experiences" class="nav-link text-white/90 hover:text-brand-orange transition font-medium">Expériences</a>
+                <a href="./#guides" class="nav-link text-white/90 hover:text-brand-orange transition font-medium">Guides</a>
+                <a href="./#blog" class="nav-link text-white/90 hover:text-brand-orange transition font-medium">Journal</a>
+                <a href="./#contact" class="bg-brand-orange hover:bg-orange-700 text-white px-6 py-2 rounded-full font-semibold transition shadow-lg transform hover:scale-105">
+                    Réserver
+                </a>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden text-white text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-brand-dark/95 backdrop-blur-md p-6 md:hidden shadow-xl origin-top">
+            <div class="flex flex-col space-y-4">
+                <a href="./#destinations" class="text-white hover:text-brand-orange">Destinations</a>
+                <a href="./#experiences" class="text-white hover:text-brand-orange">Expériences</a>
+                <a href="./#guides" class="text-white hover:text-brand-orange">Guides</a>
+                <a href="./#contact" class="bg-brand-orange text-center text-white py-3 rounded-lg">Réserver</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img id="hero-bg" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" alt="Mont Blanc" class="w-full h-full object-cover scale-110">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-brand-sand"></div>
+        </div>
+
+        <div class="relative z-10 container mx-auto px-6 text-center text-white mt-16">
+            <span class="gsap-hero-el inline-block py-1 px-3 border border-white/30 rounded-full text-sm uppercase tracking-widest mb-4">
+                Difficile
+            </span>
+            <h1 class="gsap-hero-el text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 leading-tight">
+                Le <span class="text-brand-orange italic">Mont Blanc</span>
+            </h1>
+            <p class="gsap-hero-el text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-10">
+                Une aventure épique à travers les plus hauts sommets d'Europe. Panoramas inoubliables garantis.
+            </p>
+            <div class="gsap-hero-el flex flex-col md:flex-row gap-6 justify-center items-center">
+                <div class="flex gap-8 text-white text-center">
+                    <div>
+                        <div class="text-3xl font-bold text-brand-orange">5</div>
+                        <div class="text-sm uppercase tracking-wide">Jours</div>
+                    </div>
+                    <div class="border-l border-white/30"></div>
+                    <div>
+                        <div class="text-3xl font-bold text-brand-orange">60</div>
+                        <div class="text-sm uppercase tracking-wide">Kilomètres</div>
+                    </div>
+                </div>
+            </div>
+            <div class="gsap-hero-el mt-12">
+                <a href="#booking" class="bg-brand-orange hover:bg-orange-700 text-white px-8 py-4 rounded-full font-bold transition shadow-lg hover:shadow-orange-500/30 inline-flex items-center gap-2">
+                    <i class="fa-solid fa-person-hiking"></i> Réserver cette aventure
+                </a>
+            </div>
+        </div>
+
+        <div id="scroll-indicator" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-brand-dark opacity-0">
+            <i class="fa-solid fa-arrow-down text-2xl"></i>
+        </div>
+    </header>
+
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="gsap-reveal mb-16">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-brand-dark mb-6">À propos de cette expédition</h2>
+                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
+                        Le Mont Blanc, le toit de l'Europe, vous attend pour une expédition inoubliable de 5 jours. Cette aventure combine technique alpine et panoramas à couper le souffle, traversant les trois frontières entre la France, l'Italie et la Suisse.
+                    </p>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Avec nos guides certifiés et un équipement de qualité professionnelle, vous atteindrez le sommet à 4 808 mètres tout en découvrant la magie des Alpes. Cette expérience transformera votre vision de la montagne à jamais.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <div class="gsap-reveal bg-brand-sand rounded-2xl p-8 border-l-4 border-brand-orange">
+                        <i class="fa-solid fa-dumbbell text-3xl text-brand-orange mb-4"></i>
+                        <h3 class="text-xl font-bold text-brand-dark mb-2">Niveau de Difficulté</h3>
+                        <p class="text-gray-700">Expert - Expérience alpine requise. Acclimatation obligatoire.</p>
+                    </div>
+                    <div class="gsap-reveal bg-brand-sand rounded-2xl p-8 border-l-4 border-brand-orange">
+                        <i class="fa-solid fa-users text-3xl text-brand-orange mb-4"></i>
+                        <h3 class="text-xl font-bold text-brand-dark mb-2">Taille du Groupe</h3>
+                        <p class="text-gray-700">Maximum 6 personnes pour une sécurité optimale et une expérience intime.</p>
+                    </div>
+                    <div class="gsap-reveal bg-brand-sand rounded-2xl p-8 border-l-4 border-brand-orange">
+                        <i class="fa-solid fa-calendar-days text-3xl text-brand-orange mb-4"></i>
+                        <h3 class="text-xl font-bold text-brand-dark mb-2">Périodes</h3>
+                        <p class="text-gray-700">Juillet à septembre. Les conditions optimales pour conquérir le sommet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="itinerary" class="py-20 bg-brand-green text-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-12 text-center">Itinéraire Détaillé</h2>
+                
+                <div class="space-y-8">
+                    <div class="itinerary-item bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-brand-orange rounded-full flex items-center justify-center font-bold text-brand-dark flex-shrink-0">1</div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold mb-2">Jour 1 : Arrivée à Chamonix</h3>
+                                <p class="text-gray-300 mb-4">Accueil à Chamonix, rencontre avec votre guide et présentation du matériel. Installation en refuge. Acclimatation progressive et repos bien méritée. Repas d'équipe pour créer les liens.</p>
+                                <div class="flex gap-4 text-sm">
+                                    <span><i class="fa-solid fa-utensils mr-2"></i>Petit-déjeuner et Dîner</span>
+                                    <span><i class="fa-solid fa-bed mr-2"></i>Refuge du Nid d'Aigle (2 372m)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itinerary-item bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-brand-orange rounded-full flex items-center justify-center font-bold text-brand-dark flex-shrink-0">2</div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold mb-2">Jour 2 : La Vallée Blanche (12 km)</h3>
+                                <p class="text-gray-300 mb-4">Ascension depuis le Nid d'Aigle vers le Refuge du Goûter. Progression à travers des passages rocheux et des névés. Initiation à la marche en altitude. Arrivée avant le coucher de soleil.</p>
+                                <div class="flex gap-4 text-sm">
+                                    <span><i class="fa-solid fa-climbing mr-2"></i>6-7 heures de marche</span>
+                                    <span><i class="fa-solid fa-arrow-up mr-2"></i>1 200m de dénivelé</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itinerary-item bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-brand-orange rounded-full flex items-center justify-center font-bold text-brand-dark flex-shrink-0">3</div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold mb-2">Jour 3 : L'Ascension du Sommet (5 km)</h3>
+                                <p class="text-gray-300 mb-4">Départ avant l'aube du Refuge du Goûter. Marche technique sur la Grande Mur et le Rocher Blanc. Avec courage et détermination, atteinte du sommet à 4 808m. Panorama transcendant sur l'Europe.</p>
+                                <div class="flex gap-4 text-sm">
+                                    <span><i class="fa-solid fa-star mr-2"></i>Sommet à 4 808m</span>
+                                    <span><i class="fa-solid fa-hourglass-end mr-2"></i>5-6 heures</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itinerary-item bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-brand-orange rounded-full flex items-center justify-center font-bold text-brand-dark flex-shrink-0">4</div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold mb-2">Jour 4 : Descente Triomphale (15 km)</h3>
+                                <p class="text-gray-300 mb-4">Descente via la Vallée Blanche jusqu'à Chamonix. Passages scéniques et vues époustouflantes. Arrivée en fin d'après-midi. Célébration de votre victoire au sommet d'Europe.</p>
+                                <div class="flex gap-4 text-sm">
+                                    <span><i class="fa-solid fa-arrow-down mr-2"></i>1 800m de dénivelé</span>
+                                    <span><i class="fa-solid fa-champagne-glasses mr-2"></i>Célébration au village</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="itinerary-item bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-brand-orange rounded-full flex items-center justify-center font-bold text-brand-dark flex-shrink-0">5</div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-bold mb-2">Jour 5 : Retour et Réflexion</h3>
+                                <p class="text-gray-300 mb-4">Petit-déjeuner tranquille à Chamonix. Visite guidée du village historique. Cérémonie de remise de certificat d'accomplissement. Départ avec des souvenirs inoubliables et une nouvelle perspective sur vos capacités.</p>
+                                <div class="flex gap-4 text-sm">
+                                    <span><i class="fa-solid fa-medal mr-2"></i>Certificat d'accomplissement</span>
+                                    <span><i class="fa-solid fa-camera mr-2"></i>Photos souvenir</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-brand-sand">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-brand-dark mb-12 text-center gsap-reveal">Ce qui est Inclus</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="gsap-reveal bg-white rounded-2xl p-8 shadow-lg border-l-4 border-brand-orange">
+                        <h3 class="text-xl font-bold text-brand-dark mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-check text-brand-orange"></i> Guides Professionnels
+                        </h3>
+                        <p class="text-gray-700">Guides IFMGA avec expérience alpine reconnue et formation secourisme.</p>
+                    </div>
+                    <div class="gsap-reveal bg-white rounded-2xl p-8 shadow-lg border-l-4 border-brand-orange">
+                        <h3 class="text-xl font-bold text-brand-dark mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-check text-brand-orange"></i> Hébergement en Refuge
+                        </h3>
+                        <p class="text-gray-700">Nuits en refuges alpins avec tous les repas inclus (petit-déj, déj, dîner).</p>
+                    </div>
+                    <div class="gsap-reveal bg-white rounded-2xl p-8 shadow-lg border-l-4 border-brand-orange">
+                        <h3 class="text-xl font-bold text-brand-dark mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-check text-brand-orange"></i> Équipement Technique
+                        </h3>
+                        <p class="text-gray-700">Crampons, piolets, cordes de sécurité et tout le matériel alpine professionnel.</p>
+                    </div>
+                    <div class="gsaps-reveal bg-white rounded-2xl p-8 shadow-lg border-l-4 border-brand-orange">
+                        <h3 class="text-xl font-bold text-brand-dark mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-check text-brand-orange"></i> Transport et Logistique
+                        </h3>
+                        <p class="text-gray-700">Navette depuis Chamonix et portage du matériel jusqu'aux refuges.</p>
+                    </div>
+                    <div class="gsap-reveal bg-white rounded-2xl p-8 shadow-lg border-l-4 border-brand-orange">
+                        <h3 class="text-xl font-bold text-brand-dark mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-check text-brand-orange"></i> Assurance et Secours
+                        </h3>
+                        <p class="text-gray-700">Assurance montagne complète et accès aux services de secours en montagne.</p>
+                    </div>
+                    <div class="gsap-reveal bg-white rounded-2xl p-8 shadow-lg border-l-4 border-brand-orange">
+                        <h3 class="text-xl font-bold text-brand-dark mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-check text-brand-orange"></i> Préparation Physique
+                        </h3>
+                        <p class="text-gray-700">Guide d'entraînement avant le départ et conseils acclimatation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-brand-dark mb-12 text-center gsap-reveal">Galerie de l'Aventure</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                <div class="gallery-item group relative overflow-hidden rounded-2xl shadow-lg h-72 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=400" alt="Mont Blanc Summit" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass text-white text-3xl opacity-0 group-hover:opacity-100 transition duration-300"></i>
+                    </div>
+                </div>
+                <div class="gallery-item group relative overflow-hidden rounded-2xl shadow-lg h-72 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=400" alt="Alpine Ridge" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass text-white text-3xl opacity-0 group-hover:opacity-100 transition duration-300"></i>
+                    </div>
+                </div>
+                <div class="gallery-item group relative overflow-hidden rounded-2xl shadow-lg h-72 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=400" alt="Climbers" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass text-white text-3xl opacity-0 group-hover:opacity-100 transition duration-300"></i>
+                    </div>
+                </div>
+                <div class="gallery-item group relative overflow-hidden rounded-2xl shadow-lg h-72 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=400" alt="Sunset View" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass text-white text-3xl opacity-0 group-hover:opacity-100 transition duration-300"></i>
+                    </div>
+                </div>
+                <div class="gallery-item group relative overflow-hidden rounded-2xl shadow-lg h-72 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=400" alt="Alpine Landscape" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass text-white text-3xl opacity-0 group-hover:opacity-100 transition duration-300"></i>
+                    </div>
+                </div>
+                <div class="gallery-item group relative overflow-hidden rounded-2xl shadow-lg h-72 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=400" alt="Team Victory" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass text-white text-3xl opacity-0 group-hover:opacity-100 transition duration-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="py-20 bg-brand-green text-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-2xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-6 text-center gsap-reveal">Réserver votre Aventure</h2>
+                <p class="text-center text-gray-300 mb-12 gsap-reveal">Remplissez le formulaire ci-dessous pour réserver votre place sur le Mont Blanc. Les dates se remplissent rapidement en haute saison.</p>
+
+                <form class="bg-white/10 backdrop-blur-md rounded-3xl p-10 border border-white/20 gsap-reveal" onsubmit="event.preventDefault();">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Prénom *</label>
+                            <input type="text" required="" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:bg-white/20 focus:border-brand-orange transition">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Nom *</label>
+                            <input type="text" required="" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:bg-white/20 focus:border-brand-orange transition">
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold mb-2">Email *</label>
+                        <input type="email" required="" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:bg-white/20 focus:border-brand-orange transition">
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold mb-2">Téléphone *</label>
+                        <input type="tel" required="" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:bg-white/20 focus:border-brand-orange transition">
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Date souhaitée *</label>
+                            <input type="date" required="" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:bg-white/20 focus:border-brand-orange transition">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold mb-2">Nombre de participants *</label>
+                            <select required="" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:bg-white/20 focus:border-brand-orange transition">
+                                <option value="">Sélectionner</option>
+                                <option value="1">1 personne</option>
+                                <option value="2">2 personnes</option>
+                                <option value="3">3 personnes</option>
+                                <option value="4">4 personnes</option>
+                                <option value="5">5 personnes</option>
+                                <option value="6">6 personnes (max)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-sm font-semibold mb-2">Message supplémentaire</label>
+                        <textarea rows="4" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:bg-white/20 focus:border-brand-orange transition" placeholder="Questions ou demandes spéciales..."></textarea>
+                    </div>
+
+                    <label class="flex items-center gap-3 mb-8 cursor-pointer">
+                        <input type="checkbox" required="" class="w-4 h-4">
+                        <span class="text-sm">J'accepte les conditions générales et la politique de confidentialité</span>
+                    </label>
+
+                    <button type="submit" class="w-full bg-brand-orange hover:bg-orange-700 text-white font-bold py-4 rounded-lg transition transform hover:scale-105 shadow-lg">
+                        <i class="fa-solid fa-check mr-2"></i> Demander une réservation
+                    </button>
+                </form>
+
+                <p class="text-center text-gray-400 text-sm mt-8">
+                    Prix à partir de 2 500€ par personne. Contact pour groupes et devis personnalisé.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-brand-sand">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-brand-dark mb-12 text-center gsap-reveal">Témoignages de Conquérants</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="gsap-reveal bg-white rounded-2xl p-8 shadow-lg">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-brand-orange rounded-full flex items-center justify-center text-white font-bold">M</div>
+                            <div>
+                                <h4 class="font-bold text-brand-dark">Marie Dubois</h4>
+                                <p class="text-sm text-gray-600">Paris</p>
+                            </div>
+                        </div>
+                        <div class="flex text-brand-orange mb-3">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-700 italic">"Une expérience transformatrice ! Notre guide était incroyable, le matériel de qualité et les paysages simplement magiques. Je recommande vivement cette aventure !"</p>
+                    </div>
+
+                    <div class="gsap-reveal bg-white rounded-2xl p-8 shadow-lg">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-brand-orange rounded-full flex items-center justify-center text-white font-bold">J</div>
+                            <div>
+                                <h4 class="font-bold text-brand-dark">Jean-Pierre Moreau</h4>
+                                <p class="text-sm text-gray-600">Lyon</p>
+                            </div>
+                        </div>
+                        <div class="flex text-brand-orange mb-3">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-gray-700 italic">"J'ai toujours rêvé d'atteindre le sommet du Mont Blanc. TerraTrek a rendu ce rêve possible avec professionnalisme et bienveillance. C'est inoubliable !"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-brand-dark text-white pt-20 pb-10 border-t border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-1 footer-col opacity-0">
+                    <a href="./" class="text-2xl font-serif font-bold text-white tracking-wider flex items-center gap-2 mb-6">
+                        <i class="fa-solid fa-mountain-sun text-brand-orange"></i> TerraTrek
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Agence de randonnée premium spécialisée dans les expériences authentiques et durables à travers le monde.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-orange transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-orange transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-orange transition"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col opacity-0">
+                    <h4 class="text-lg font-bold mb-6 text-brand-sand">Explorer</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="./#destinations" class="hover:text-brand-orange transition">Nos Destinations</a></li>
+                        <li><a href="./#experiences" class="hover:text-brand-orange transition">Guides Experts</a></li>
+                        <li><a href="./#" class="hover:text-brand-orange transition">Niveaux de Difficulté</a></li>
+                        <li><a href="./#" class="hover:text-brand-orange transition">Blog Aventure</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col opacity-0">
+                    <h4 class="text-lg font-bold mb-6 text-brand-sand">Entreprise</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="./#" class="hover:text-brand-orange transition">À Propos</a></li>
+                        <li><a href="./#" class="hover:text-brand-orange transition">Carrières</a></li>
+                        <li><a href="./#" class="hover:text-brand-orange transition">Presse</a></li>
+                        <li><a href="./#contact" class="hover:text-brand-orange transition">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col opacity-0">
+                    <h4 class="text-lg font-bold mb-6 text-brand-sand">Contact</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot mt-1 text-brand-orange"></i>
+                            <span>123 Avenue des Cimes,<br>74400 Chamonix, France</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-brand-orange"></i>
+                            <span>+33 4 50 50 50 50</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-brand-orange"></i>
+                            <span>bonjour@terratrek.fr</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+                <p>© 2025 TerraTrek. Tous droits réservés.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="./#" class="hover:text-white transition">Mentions Légales</a>
+                    <a href="./#" class="hover:text-white transition">Confidentialité</a>
+                    <a href="./#" class="hover:text-white transition">CGV</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const nav = document.getElementById('navbar');
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.remove('bg-transparent', 'py-4');
+                nav.classList.add('bg-brand-dark/90', 'backdrop-blur-md', 'py-2', 'shadow-lg');
+            } else {
+                nav.classList.add('bg-transparent', 'py-4');
+                nav.classList.remove('bg-brand-dark/90', 'backdrop-blur-md', 'py-2', 'shadow-lg');
+            }
+        });
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            const icon = btn.querySelector('i');
+            if (menu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+                gsap.fromTo("#mobile-menu", {scaleY: 0, opacity: 0}, {scaleY: 1, opacity: 1, duration: 0.3, ease: "power2.out"});
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const heroTl = gsap.timeline();
+            
+            heroTl.to("#hero-bg", {
+                scale: 1,
+                duration: 10,
+                ease: "power1.inOut"
+            }, 0);
+
+            heroTl.fromTo(".gsap-hero-el", 
+                { y: 50, autoAlpha: 0 },
+                { y: 0, autoAlpha: 1, duration: 1, stagger: 0.2, ease: "power3.out" },
+                0.5
+            );
+
+            heroTl.to("#scroll-indicator", {
+                y: 10,
+                autoAlpha: 1,
+                duration: 1,
+                yoyo: true,
+                repeat: -1,
+                ease: "power1.inOut"
+            }, 2);
+
+            gsap.to("#hero-bg", {
+                yPercent: 30,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "header",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+
+            gsap.utils.toArray(".gsap-reveal").forEach((el) => {
+                gsap.fromTo(el, 
+                    { y: 30, autoAlpha: 0 },
+                    { 
+                        y: 0, 
+                        autoAlpha: 1, 
+                        duration: 0.8,
+                        scrollTrigger: { 
+                            trigger: el, 
+                            start: "top 75%",
+                            end: "top 40%",
+                            scrub: 1,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+
+            gsap.utils.toArray(".itinerary-item").forEach((item) => {
+                gsap.fromTo(item,
+                    { x: -50, autoAlpha: 0 },
+                    {
+                        x: 0,
+                        autoAlpha: 1,
+                        duration: 0.8,
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 80%",
+                            end: "top 45%",
+                            scrub: 1,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+
+            gsap.utils.toArray(".gallery-item").forEach((item) => {
+                gsap.fromTo(item,
+                    { scale: 0.95, autoAlpha: 0 },
+                    {
+                        scale: 1,
+                        autoAlpha: 1,
+                        duration: 0.8,
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 85%",
+                            end: "top 50%",
+                            scrub: 1,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+
+            gsap.utils.toArray(".footer-col").forEach((col) => {
+                gsap.fromTo(col,
+                    { autoAlpha: 0, y: 30 },
+                    {
+                        autoAlpha: 1,
+                        y: 0,
+                        duration: 0.8,
+                        scrollTrigger: {
+                            trigger: col,
+                            start: "top 90%",
+                            end: "top 60%",
+                            scrub: 1,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+        });
+    </script>
+</body>
+</html>
