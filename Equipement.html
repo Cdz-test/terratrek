@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Équipement & Matériel - TerraTrek</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#1a2e26',
+                            green: '#2d4a3e',
+                            sage: '#8f9e8a',
+                            sand: '#e6dfd3',
+                            orange: '#d97706'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e6dfd3;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d4a3e;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1a2e26;
+        }
+        
+        .gsap-reveal, .gsap-hero-el, .gear-card, .check-item {
+            visibility: hidden;
+        }
+    </style>
+    <meta name="description" content="TerraTrek - L'Aventure en Pleine Nature">
+</head>
+<body class="bg-brand-sand text-brand-dark font-sans antialiased selection:bg-brand-orange selection:text-white overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="./" class="text-2xl font-serif font-bold text-white tracking-wider flex items-center gap-2" data-index-id="692632c212ede531b2821c4d" id="index-link">
+                <i class="fa-solid fa-mountain-sun"></i> TerraTrek
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="./#destinations" class="nav-link text-white/90 hover:text-brand-orange transition font-medium">Destinations</a>
+                <a href="./" class="nav-link text-white/90 hover:text-brand-orange transition font-medium">Expériences</a>
+                <a href="./#guides" class="nav-link text-white/90 hover:text-brand-orange transition font-medium">Guides</a>
+                <a href="#" class="nav-link text-brand-orange font-medium border-b-2 border-brand-orange">Équipement</a>
+                <a href="./#contact" class="bg-brand-orange hover:bg-orange-700 text-white px-6 py-2 rounded-full font-semibold transition shadow-lg transform hover:scale-105">
+                    Réserver
+                </a>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden text-white text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-brand-dark/95 backdrop-blur-md p-6 md:hidden shadow-xl origin-top">
+            <div class="flex flex-col space-y-4">
+                <a href="./#destinations" class="text-white hover:text-brand-orange">Destinations</a>
+                <a href="./" class="text-white hover:text-brand-orange">Expériences</a>
+                <a href="#" class="text-brand-orange">Équipement</a>
+                <a href="./#contact" class="bg-brand-orange text-center text-white py-3 rounded-lg">Réserver</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header / Hero -->
+    <header class="relative h-[70vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img id="hero-bg" src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHwzfHxjYW1waW5nfGVufDB8MHx8fDE3NjQxMTEwNzl8MA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1920" alt="Camping sauvage" class="w-full h-full object-cover scale-110">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-brand-sand"></div>
+        </div>
+
+        <div class="relative z-10 container mx-auto px-6 text-center text-white mt-16">
+            <span class="gsap-hero-el inline-block py-1 px-3 border border-white/30 rounded-full text-sm uppercase tracking-widest mb-4 bg-white/10 backdrop-blur-sm">
+                Voyagez Léger
+            </span>
+            <h1 class="gsap-hero-el text-5xl md:text-7xl font-serif font-bold mb-6 leading-tight">
+                Équipement <span class="text-brand-orange italic">Pro</span> Inclus
+            </h1>
+            <p class="gsap-hero-el text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-10">
+                Nous fournissons le meilleur matériel du marché pour que vous puissiez vous concentrer sur l'essentiel : l'aventure.
+            </p>
+        </div>
+    </header>
+
+    <!-- Intro Section -->
+    <section class="py-20 bg-brand-sand">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2 gsap-reveal">
+                    <h4 class="text-brand-orange font-bold uppercase tracking-widest mb-2">Notre Philosophie</h4>
+                    <h2 class="text-4xl font-serif font-bold text-brand-dark mb-6">La qualité sans compromis</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Chez TerraTrek, nous savons qu'une bonne nuit de sommeil et un sac léger sont les clés d'une randonnée réussie. C'est pourquoi nous investissons dans du matériel technique haut de gamme, renouvelé chaque saison.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Fini les sacs de 20kg et les tentes qui prennent l'eau. Nous sélectionnons nos équipements parmi les marques les plus fiables (MSR, Thermarest, Black Diamond) pour garantir votre sécurité et votre confort, même dans les conditions les plus rudes.
+                    </p>
+                    <div class="flex gap-4">
+                        <div class="flex flex-col items-center">
+                            <span class="text-3xl font-bold text-brand-green">100%</span>
+                            <span class="text-xs uppercase tracking-wide text-gray-500">Testé</span>
+                        </div>
+                        <div class="w-px bg-gray-300 h-12"></div>
+                        <div class="flex flex-col items-center">
+                            <span class="text-3xl font-bold text-brand-green">-30%</span>
+                            <span class="text-xs uppercase tracking-wide text-gray-500">Poids Moyen</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 relative gsap-reveal">
+                    <div class="absolute inset-0 bg-brand-orange rounded-3xl transform rotate-3 translate-x-2 translate-y-2 opacity-20"></div>
+                    <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHw1fHxjYW1waW5nJTIwZ2VhcnxlbnwwfDB8fHwxNzY0MTExNjE1fDA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" alt="Matériel de randonnée" class="relative rounded-3xl shadow-2xl w-full object-cover h-[400px]">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gear Grid -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 gsap-reveal">
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-dark mb-4">Ce que nous fournissons</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Tout le matériel technique collectif et individuel de bivouac est inclus dans nos tarifs.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Item 1 -->
+                <div class="gear-card bg-brand-sand/30 rounded-2xl p-8 hover:bg-brand-sand transition duration-500 group border border-transparent hover:border-brand-orange/20">
+                    <div class="w-16 h-16 bg-brand-green rounded-full flex items-center justify-center text-white text-2xl mb-6 group-hover:scale-110 transition duration-300 shadow-lg">
+                        <i class="fa-solid fa-tent"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-3 font-serif">Tentes Ultralégères</h3>
+                    <p class="text-gray-600 text-sm mb-4">Modèles dômes autoportants 2 ou 3 places. Double toit imperméable 3000mm, moustiquaire intégrale. Poids moyen : 1.2kg par personne.</p>
+                    <ul class="text-xs text-gray-500 space-y-1">
+                        <li><i class="fa-solid fa-check text-brand-orange mr-2"></i>Montage rapide</li>
+                        <li><i class="fa-solid fa-check text-brand-orange mr-2"></i>Haute résistance au vent</li>
+                    </ul>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="gear-card bg-brand-sand/30 rounded-2xl p-8 hover:bg-brand-sand transition duration-500 group border border-transparent hover:border-brand-orange/20">
+                    <div class="w-16 h-16 bg-brand-green rounded-full flex items-center justify-center text-white text-2xl mb-6 group-hover:scale-110 transition duration-300 shadow-lg">
+                        <i class="fa-solid fa-bed"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-3 font-serif">Couchage Thermique</h3>
+                    <p class="text-gray-600 text-sm mb-4">Sacs de couchage en duvet ou synthétique haute performance adaptés à la saison (Confort 0°C à -10°C). Draps de sac en soie fournis pour l'hygiène.</p>
+                    <ul class="text-xs text-gray-500 space-y-1">
+                        <li><i class="fa-solid fa-check text-brand-orange mr-2"></i>Nettoyés après chaque trek</li>
+                        <li><i class="fa-solid fa-check text-brand-orange mr-2"></i>Compressibles</li>
+                    </ul>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="gear-card bg-brand-sand/30 rounded-2xl p-8 hover:bg-brand-sand transition duration-500 group border border-transparent hover:border-brand-orange/20">
+                    <div class="w-16 h-16 bg-brand-green rounded-full flex items-center justify-center text-white text-2xl mb-6 group-hover:scale-110 transition duration-300 shadow-lg">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-3 font-serif">Matelas Isolants</h3>
+                    <p class="text-gray-600 text-sm mb-4">Matelas gonflables type Thermarest NeoAir. Isolation R-Value &gt; 3.0 pour vous protéger du froid du sol. Confort garanti.</p>
+                    <ul class="text-xs text-gray-500 space-y-1">
+                        <li><i class="fa-solid fa-check text-brand-orange mr-2"></i>Épaisseur 6cm</li>
+                        <li><i class="fa-solid fa-check text-brand-orange mr-2"></i>Ultra-compacts</li>
+                    </ul>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="gear-card bg-brand-sand/30 rounded-2xl p-8 hover:bg-brand-sand transition duration-500 group border border-transparent hover:border-brand-orange/20">
+                    <div class="w-16 h-16 bg-brand-green rounded-full flex items-center justify-center text-white text-2xl mb-6 group-hover:scale-110 transition duration-300 shadow-lg">
+                        <i class="fa-solid fa-person-hiking"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-3 font-serif">Bâtons de Marche</h3>
+                    <p class="text-gray-600 text-sm mb-4">Paire de bâtons télescopiques en carbone ou aluminium. Indispensables pour économiser vos articulations dans les dénivelés.</p>
+                    <ul class="text-xs text-gray-500 space-y-1">
+                        <li><i class="fa-solid fa-check text-brand-orange mr-2"></i>Réglables</li>
+                        <li><i class="fa-solid fa-check text-brand-orange mr-2"></i>Pointes tungstène</li>
+                    </ul>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="gear-card bg-brand-sand/30 rounded-2xl p-8 hover:bg-brand-sand transition duration-500 group border border-transparent hover:border-brand-orange/20">
+                    <div class="w-16 h-16 bg-brand-green rounded-full flex items-center justify-center text-white text-2xl mb-6 group-hover:scale-110 transition duration-300 shadow-lg">
+                        <i class="fa-solid fa-fire-burner"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-3 font-serif">Cuisine de Bivouac</h3>
+                    <p class="text-gray-600 text-sm mb-4">Réchauds haute performance (Jetboil/MSR), popotes légères, gaz et ustensiles. Nous gérons la logistique des repas chauds.</p>
+                    <ul class="text-xs text-gray-500 space-y-1">
+                        <li><i class="fa-solid fa-check text-brand-orange mr-2"></i>Repas lyophilisés gourmands</li>
+                        <li><i class="fa-solid fa-check text-brand-orange mr-2"></i>Café du matin inclus</li>
+                    </ul>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="gear-card bg-brand-sand/30 rounded-2xl p-8 hover:bg-brand-sand transition duration-500 group border border-transparent hover:border-brand-orange/20">
+                    <div class="w-16 h-16 bg-brand-green rounded-full flex items-center justify-center text-white text-2xl mb-6 group-hover:scale-110 transition duration-300 shadow-lg">
+                        <i class="fa-solid fa-kit-medical"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-3 font-serif">Sécurité &amp; Orientation</h3>
+                    <p class="text-gray-600 text-sm mb-4">Chaque guide est équipé d'une trousse de secours complète, d'un GPS Garmin InReach (SOS satellite) et de cartes topographiques.</p>
+                    <ul class="text-xs text-gray-500 space-y-1">
+                        <li><i class="fa-solid fa-check text-brand-orange mr-2"></i>Liaison satellite 24/7</li>
+                        <li><i class="fa-solid fa-check text-brand-orange mr-2"></i>Filtres à eau Katadyn</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Checklist Section -->
+    <section class="py-20 bg-brand-green text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-brand-orange/10 rounded-full blur-3xl -ml-20 -mb-20"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-12 gsap-reveal">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4">Checklist du Randonneur</h2>
+                <p class="text-gray-300">Pour que l'expérience soit parfaite, voici comment nous nous répartissons la charge.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Provided -->
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/10 check-item">
+                    <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
+                        <i class="fa-solid fa-box-open text-brand-orange text-2xl"></i>
+                        <h3 class="text-xl font-bold">Fourni par TerraTrek</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-gray-300"><i class="fa-solid fa-check text-brand-orange"></i> Tente &amp; Matelas</li>
+                        <li class="flex items-center gap-3 text-gray-300"><i class="fa-solid fa-check text-brand-orange"></i> Sac de couchage &amp; Drap</li>
+                        <li class="flex items-center gap-3 text-gray-300"><i class="fa-solid fa-check text-brand-orange"></i> Bâtons de marche</li>
+                        <li class="flex items-center gap-3 text-gray-300"><i class="fa-solid fa-check text-brand-orange"></i> Vaisselle &amp; Réchaud</li>
+                        <li class="flex items-center gap-3 text-gray-300"><i class="fa-solid fa-check text-brand-orange"></i> Trousse de secours collective</li>
+                        <li class="flex items-center gap-3 text-gray-300"><i class="fa-solid fa-check text-brand-orange"></i> Pastilles purification eau</li>
+                    </ul>
+                </div>
+
+                <!-- To Bring -->
+                <div class="bg-brand-sand text-brand-dark rounded-2xl p-8 shadow-xl check-item">
+                    <div class="flex items-center gap-3 mb-6 border-b border-brand-dark/10 pb-4">
+                        <i class="fa-solid fa-person-walking-luggage text-brand-green text-2xl"></i>
+                        <h3 class="text-xl font-bold">À prévoir par vous</h3>
+                    </div>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-gray-700"><i class="fa-regular fa-square text-brand-green"></i> Sac à dos (40-50L)</li>
+                        <li class="flex items-center gap-3 text-gray-700"><i class="fa-regular fa-square text-brand-green"></i> Chaussures de marche rodées</li>
+                        <li class="flex items-center gap-3 text-gray-700"><i class="fa-regular fa-square text-brand-green"></i> Vêtements techniques (3 couches)</li>
+                        <li class="flex items-center gap-3 text-gray-700"><i class="fa-regular fa-square text-brand-green"></i> Gourde (2L min)</li>
+                        <li class="flex items-center gap-3 text-gray-700"><i class="fa-regular fa-square text-brand-green"></i> Lampe frontale</li>
+                        <li class="flex items-center gap-3 text-gray-700"><i class="fa-regular fa-square text-brand-green"></i> Effets personnels &amp; Hygiène</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="text-brand-orange hover:text-white transition font-bold border-b border-brand-orange pb-1">Télécharger la liste complète en PDF</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 bg-brand-sand">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-dark mb-6">Prêt à tester notre matériel ?</h2>
+            <p class="text-gray-600 mb-8 max-w-2xl mx-auto">Réservez votre prochaine aventure et laissez-nous gérer la logistique lourde. Vous n'avez qu'à marcher.</p>
+            <a href="./#destinations" class="bg-brand-orange hover:bg-orange-700 text-white px-8 py-4 rounded-full font-bold transition shadow-lg hover:shadow-orange-500/30 inline-flex items-center gap-2">
+                <i class="fa-solid fa-map-location-dot"></i> Choisir une Destination
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-white pt-20 pb-10 border-t border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-1 footer-col">
+                    <a href="./" class="text-2xl font-serif font-bold text-white tracking-wider flex items-center gap-2 mb-6">
+                        <i class="fa-solid fa-mountain-sun text-brand-orange"></i> TerraTrek
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Agence de randonnée premium spécialisée dans les expériences authentiques et durables à travers le monde.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-orange transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-orange transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-orange transition"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="text-lg font-bold mb-6 text-brand-sand">Explorer</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="./#destinations" class="hover:text-brand-orange transition">Nos Destinations</a></li>
+                        <li><a href="./#guides" class="hover:text-brand-orange transition">Guides Experts</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Niveaux de Difficulté</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Blog Aventure</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="text-lg font-bold mb-6 text-brand-sand">Entreprise</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-brand-orange transition">À Propos</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Carrières</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Presse</a></li>
+                        <li><a href="./#contact" class="hover:text-brand-orange transition">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="text-lg font-bold mb-6 text-brand-sand">Contact</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot mt-1 text-brand-orange"></i>
+                            <span>123 Avenue des Cimes,<br>74400 Chamonix, France</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-brand-orange"></i>
+                            <span>+33 4 50 50 50 50</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-brand-orange"></i>
+                            <span>bonjour@terratrek.fr</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+                <p>© 2025 TerraTrek. Tous droits réservés.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition">Mentions Légales</a>
+                    <a href="#" class="hover:text-white transition">Confidentialité</a>
+                    <a href="#" class="hover:text-white transition">CGV</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation Logic
+        const nav = document.getElementById('navbar');
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.remove('bg-transparent', 'py-4');
+                nav.classList.add('bg-brand-dark/90', 'backdrop-blur-md', 'py-2', 'shadow-lg');
+            } else {
+                nav.classList.add('bg-transparent', 'py-4');
+                nav.classList.remove('bg-brand-dark/90', 'backdrop-blur-md', 'py-2', 'shadow-lg');
+            }
+        });
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            const icon = btn.querySelector('i');
+            if (menu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+                gsap.fromTo("#mobile-menu", {scaleY: 0, opacity: 0}, {scaleY: 1, opacity: 1, duration: 0.3, ease: "power2.out"});
+            }
+        });
+
+        // Animations
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Hero Animation
+            const heroTl = gsap.timeline();
+            
+            heroTl.to("#hero-bg", {
+                scale: 1,
+                duration: 10,
+                ease: "power1.inOut"
+            }, 0);
+
+            heroTl.fromTo(".gsap-hero-el", 
+                { y: 50, autoAlpha: 0 },
+                { y: 0, autoAlpha: 1, duration: 1, stagger: 0.2, ease: "power3.out" },
+                0.5
+            );
+
+            // Parallax Hero
+            gsap.to("#hero-bg", {
+                yPercent: 30,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "header",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+
+            // Standard Reveals
+            gsap.utils.toArray(".gsap-reveal").forEach((el) => {
+                gsap.fromTo(el, 
+                    { y: 30, autoAlpha: 0 },
+                    { 
+                        y: 0, 
+                        autoAlpha: 1, 
+                        duration: 0.8,
+                        scrollTrigger: { 
+                            trigger: el, 
+                            start: "top 80%",
+                            end: "top 50%",
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
+            });
+
+            // Gear Cards Stagger
+            gsap.fromTo(".gear-card", 
+                { y: 50, autoAlpha: 0 },
+                { 
+                    y: 0, 
+                    autoAlpha: 1, 
+                    duration: 0.8,
+                    stagger: 0.1,
+                    scrollTrigger: {
+                        trigger: ".gear-card",
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+
+            // Checklist Items
+            gsap.utils.toArray(".check-item").forEach((item, i) => {
+                gsap.fromTo(item,
+                    { x: i % 2 === 0 ? -50 : 50, autoAlpha: 0 },
+                    {
+                        x: 0,
+                        autoAlpha: 1,
+                        duration: 1,
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 80%",
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
+            });
+
+            // Footer
+            gsap.utils.toArray(".footer-col").forEach((col, i) => {
+                gsap.fromTo(col,
+                    { autoAlpha: 0, y: 30 },
+                    {
+                        autoAlpha: 1,
+                        y: 0,
+                        duration: 0.8,
+                        scrollTrigger: {
+                            trigger: col,
+                            start: "top 95%",
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
+            });
+        });
+    </script>
+</body>
+</html>
