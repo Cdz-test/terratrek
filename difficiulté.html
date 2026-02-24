@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niveaux de Difficultés - TerraTrek</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#1a2e26',
+                            green: '#2d4a3e',
+                            sage: '#8f9e8a',
+                            sand: '#e6dfd3',
+                            orange: '#d97706'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e6dfd3;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d4a3e;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1a2e26;
+        }
+
+        .difficulty-card, .level-feature, .comparison-row {
+            visibility: hidden;
+        }
+    </style>
+    <meta name="description" content="TerraTrek - L'Aventure en Pleine Nature">
+</head>
+<body class="bg-brand-sand text-brand-dark font-sans antialiased selection:bg-brand-orange selection:text-white overflow-x-hidden">
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="./" class="text-2xl font-serif font-bold text-white tracking-wider flex items-center gap-2" data-index-id="692632c212ede531b2821c4d" id="index-link">
+                <i class="fa-solid fa-mountain-sun"></i> TerraTrek
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#destinations" class="nav-link text-white/90 hover:text-brand-orange transition font-medium">Destinations</a>
+                <a href="./" class="nav-link text-white/90 hover:text-brand-orange transition font-medium">Expériences</a>
+                <a href="#guides" class="nav-link text-white/90 hover:text-brand-orange transition font-medium">Guides</a>
+                <a href="#" class="nav-link text-white/90 hover:text-brand-orange transition font-medium">Journal</a>
+                <a href="#contact" class="bg-brand-orange hover:bg-orange-700 text-white px-6 py-2 rounded-full font-semibold transition shadow-lg transform hover:scale-105">
+                    Réserver
+                </a>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden text-white text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-brand-dark/95 backdrop-blur-md p-6 md:hidden shadow-xl origin-top">
+            <div class="flex flex-col space-y-4">
+                <a href="#destinations" class="text-white hover:text-brand-orange">Destinations</a>
+                <a href="#experiences" class="text-white hover:text-brand-orange">Expériences</a>
+                <a href="#guides" class="text-white hover:text-brand-orange">Guides</a>
+                <a href="#contact" class="bg-brand-orange text-center text-white py-3 rounded-lg">Réserver</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative h-screen flex items-center justify-center overflow-hidden pt-20">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" alt="Montagnes" class="w-full h-full object-cover scale-110">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-brand-sand"></div>
+        </div>
+
+        <div class="relative z-10 container mx-auto px-6 text-center text-white mt-16">
+            <span class="inline-block py-1 px-3 border border-white/30 rounded-full text-sm uppercase tracking-widest mb-4 opacity-0 animate-fade-in">
+                Trouvez Votre Niveau
+            </span>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 leading-tight opacity-0 animate-fade-in">
+                Niveaux de <br><span class="text-brand-orange italic">Difficultés</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-10 opacity-0 animate-fade-in">
+                De la balade facile aux défis extrêmes, trouvez l'aventure qui correspond à votre niveau et vos envies.
+            </p>
+        </div>
+
+        <div id="scroll-indicator" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-brand-dark opacity-0">
+            <i class="fa-solid fa-arrow-down text-2xl"></i>
+        </div>
+    </header>
+
+    <section class="py-20 bg-brand-sand">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-dark mb-4">Nos 5 Niveaux de Difficulté</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Chaque niveau est conçu pour offrir une expérience sécurisée et gratifiante, adaptée à votre condition physique et votre expérience.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
+                <!-- Niveau 1 -->
+                <div class="difficulty-card group bg-gradient-to-br from-green-400 to-green-600 rounded-2xl p-8 text-white hover:shadow-2xl transition duration-500 transform hover:-translate-y-4">
+                    <div class="text-5xl font-bold mb-2 opacity-80">1</div>
+                    <h3 class="text-2xl font-bold mb-2">Très Facile</h3>
+                    <div class="h-1 w-12 bg-white/30 rounded-full mb-6"></div>
+                    <ul class="space-y-2 text-sm">
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> 0-300m dénivelé</li>
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> 5-10 km</li>
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> Sentier aménagé</li>
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> 2-3 heures</li>
+                    </ul>
+                    <div class="mt-6 pt-6 border-t border-white/20">
+                        <p class="text-xs text-white/80">Parfait pour débuter ou se relaxer en famille</p>
+                    </div>
+                </div>
+
+                <!-- Niveau 2 -->
+                <div class="difficulty-card group bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl p-8 text-white hover:shadow-2xl transition duration-500 transform hover:-translate-y-4">
+                    <div class="text-5xl font-bold mb-2 opacity-80">2</div>
+                    <h3 class="text-2xl font-bold mb-2">Facile</h3>
+                    <div class="h-1 w-12 bg-white/30 rounded-full mb-6"></div>
+                    <ul class="space-y-2 text-sm">
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> 300-600m dénivelé</li>
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> 10-15 km</li>
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> Sentier bien marqué</li>
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> 4-5 heures</li>
+                    </ul>
+                    <div class="mt-6 pt-6 border-t border-white/20">
+                        <p class="text-xs text-white/80">Idéal pour randonneurs débutants</p>
+                    </div>
+                </div>
+
+                <!-- Niveau 3 -->
+                <div class="difficulty-card group bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-2xl p-8 text-white hover:shadow-2xl transition duration-500 transform hover:-translate-y-4">
+                    <div class="text-5xl font-bold mb-2 opacity-80">3</div>
+                    <h3 class="text-2xl font-bold mb-2">Moyen</h3>
+                    <div class="h-1 w-12 bg-white/30 rounded-full mb-6"></div>
+                    <ul class="space-y-2 text-sm">
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> 600-1200m dénivelé</li>
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> 15-25 km</li>
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> Quelques passages rocheux</li>
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> 6-8 heures</li>
+                    </ul>
+                    <div class="mt-6 pt-6 border-t border-white/20">
+                        <p class="text-xs text-white/80">Pour randonneurs confirmés</p>
+                    </div>
+                </div>
+
+                <!-- Niveau 4 -->
+                <div class="difficulty-card group bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl p-8 text-white hover:shadow-2xl transition duration-500 transform hover:-translate-y-4">
+                    <div class="text-5xl font-bold mb-2 opacity-80">4</div>
+                    <h3 class="text-2xl font-bold mb-2">Difficile</h3>
+                    <div class="h-1 w-12 bg-white/30 rounded-full mb-6"></div>
+                    <ul class="space-y-2 text-sm">
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> 1200-2000m dénivelé</li>
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> 25-40 km</li>
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> Passages exposés</li>
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> 8-10 heures</li>
+                    </ul>
+                    <div class="mt-6 pt-6 border-t border-white/20">
+                        <p class="text-xs text-white/80">Expérience randonnée requise</p>
+                    </div>
+                </div>
+
+                <!-- Niveau 5 -->
+                <div class="difficulty-card group bg-gradient-to-br from-red-600 to-red-800 rounded-2xl p-8 text-white hover:shadow-2xl transition duration-500 transform hover:-translate-y-4">
+                    <div class="text-5xl font-bold mb-2 opacity-80">5</div>
+                    <h3 class="text-2xl font-bold mb-2">Expert</h3>
+                    <div class="h-1 w-12 bg-white/30 rounded-full mb-6"></div>
+                    <ul class="space-y-2 text-sm">
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> 2000m+ dénivelé</li>
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> 40km+ ou multi-jours</li>
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> Escalade, alpinisme</li>
+                        <li><i class="fa-solid fa-check text-white mr-2"></i> 10h+ par jour</li>
+                    </ul>
+                    <div class="mt-6 pt-6 border-t border-white/20">
+                        <p class="text-xs text-white/80">Pour montagnards aguerris</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-dark mb-12 text-center">Tableau Comparatif Détaillé</h2>
+
+            <div class="overflow-x-auto rounded-2xl shadow-lg">
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-brand-green text-white">
+                            <th class="px-6 py-4 text-left font-bold">Critères</th>
+                            <th class="px-6 py-4 text-center font-bold">Très Facile</th>
+                            <th class="px-6 py-4 text-center font-bold">Facile</th>
+                            <th class="px-6 py-4 text-center font-bold">Moyen</th>
+                            <th class="px-6 py-4 text-center font-bold">Difficile</th>
+                            <th class="px-6 py-4 text-center font-bold">Expert</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="comparison-row border-b border-gray-200 hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold text-brand-dark">Dénivelé Total</td>
+                            <td class="px-6 py-4 text-center">0-300m</td>
+                            <td class="px-6 py-4 text-center">300-600m</td>
+                            <td class="px-6 py-4 text-center">600-1200m</td>
+                            <td class="px-6 py-4 text-center">1200-2000m</td>
+                            <td class="px-6 py-4 text-center">2000m+</td>
+                        </tr>
+                        <tr class="comparison-row border-b border-gray-200 hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold text-brand-dark">Distance</td>
+                            <td class="px-6 py-4 text-center">5-10 km</td>
+                            <td class="px-6 py-4 text-center">10-15 km</td>
+                            <td class="px-6 py-4 text-center">15-25 km</td>
+                            <td class="px-6 py-4 text-center">25-40 km</td>
+                            <td class="px-6 py-4 text-center">40km+</td>
+                        </tr>
+                        <tr class="comparison-row border-b border-gray-200 hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold text-brand-dark">Durée Moyenne</td>
+                            <td class="px-6 py-4 text-center">2-3h</td>
+                            <td class="px-6 py-4 text-center">4-5h</td>
+                            <td class="px-6 py-4 text-center">6-8h</td>
+                            <td class="px-6 py-4 text-center">8-10h</td>
+                            <td class="px-6 py-4 text-center">10h+</td>
+                        </tr>
+                        <tr class="comparison-row border-b border-gray-200 hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold text-brand-dark">Type de Terrain</td>
+                            <td class="px-6 py-4 text-center text-sm">Sentier aménagé</td>
+                            <td class="px-6 py-4 text-center text-sm">Bien marqué</td>
+                            <td class="px-6 py-4 text-center text-sm">Parfois rocheux</td>
+                            <td class="px-6 py-4 text-center text-sm">Exposé</td>
+                            <td class="px-6 py-4 text-center text-sm">Alpinisme</td>
+                        </tr>
+                        <tr class="comparison-row border-b border-gray-200 hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold text-brand-dark">Équipement</td>
+                            <td class="px-6 py-4 text-center text-sm">Basique</td>
+                            <td class="px-6 py-4 text-center text-sm">Standard</td>
+                            <td class="px-6 py-4 text-center text-sm">Complet</td>
+                            <td class="px-6 py-4 text-center text-sm">Spécialisé</td>
+                            <td class="px-6 py-4 text-center text-sm">Technique</td>
+                        </tr>
+                        <tr class="comparison-row border-b border-gray-200 hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold text-brand-dark">Condition Physique</td>
+                            <td class="px-6 py-4 text-center text-sm">Aucune</td>
+                            <td class="px-6 py-4 text-center text-sm">Basique</td>
+                            <td class="px-6 py-4 text-center text-sm">Bonne</td>
+                            <td class="px-6 py-4 text-center text-sm">Très bonne</td>
+                            <td class="px-6 py-4 text-center text-sm">Excellente</td>
+                        </tr>
+                        <tr class="comparison-row border-b border-gray-200 hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold text-brand-dark">Expérience Requise</td>
+                            <td class="px-6 py-4 text-center text-sm">Aucune</td>
+                            <td class="px-6 py-4 text-center text-sm">Débutant</td>
+                            <td class="px-6 py-4 text-center text-sm">Confirmer</td>
+                            <td class="px-6 py-4 text-center text-sm">Avancé</td>
+                            <td class="px-6 py-4 text-center text-sm">Expert</td>
+                        </tr>
+                        <tr class="comparison-row hover:bg-gray-50">
+                            <td class="px-6 py-4 font-semibold text-brand-dark">Âge Minimum</td>
+                            <td class="px-6 py-4 text-center">4 ans</td>
+                            <td class="px-6 py-4 text-center">8 ans</td>
+                            <td class="px-6 py-4 text-center">12 ans</td>
+                            <td class="px-6 py-4 text-center">16 ans</td>
+                            <td class="px-6 py-4 text-center">18 ans</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-brand-sand">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-dark mb-12 text-center">Caractéristiques de Chaque Niveau</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- Niveau 1 Features -->
+                <div class="level-feature">
+                    <div class="bg-green-500 text-white rounded-t-2xl p-6">
+                        <h3 class="text-xl font-bold">Très Facile</h3>
+                    </div>
+                    <div class="bg-white rounded-b-2xl p-6 shadow-lg">
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-heart text-red-500 mt-1"></i>
+                                <span class="text-sm">Idéal pour les familles</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-person text-green-500 mt-1"></i>
+                                <span class="text-sm">Peu d'effort physique</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-map text-blue-500 mt-1"></i>
+                                <span class="text-sm">Sentiers touristiques</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-camera text-brand-orange mt-1"></i>
+                                <span class="text-sm">Spots photos faciles</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Niveau 2 Features -->
+                <div class="level-feature">
+                    <div class="bg-blue-500 text-white rounded-t-2xl p-6">
+                        <h3 class="text-xl font-bold">Facile</h3>
+                    </div>
+                    <div class="bg-white rounded-b-2xl p-6 shadow-lg">
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-dumbbell text-blue-500 mt-1"></i>
+                                <span class="text-sm">Condition modérée</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-mountain text-green-600 mt-1"></i>
+                                <span class="text-sm">Montées progressives</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-tree text-green-500 mt-1"></i>
+                                <span class="text-sm">Nature accessible</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-sun text-yellow-500 mt-1"></i>
+                                <span class="text-sm">Journée à la journée</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Niveau 3 Features -->
+                <div class="level-feature">
+                    <div class="bg-yellow-500 text-white rounded-t-2xl p-6">
+                        <h3 class="text-xl font-bold">Moyen</h3>
+                    </div>
+                    <div class="bg-white rounded-b-2xl p-6 shadow-lg">
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-person-hiking text-yellow-600 mt-1"></i>
+                                <span class="text-sm">Bonne endurance</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-rock text-gray-600 mt-1"></i>
+                                <span class="text-sm">Passages rocheux</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-compass text-blue-600 mt-1"></i>
+                                <span class="text-sm">Navigation requise</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-campground text-green-700 mt-1"></i>
+                                <span class="text-sm">Camping possible</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Niveau 4 Features -->
+                <div class="level-feature">
+                    <div class="bg-orange-500 text-white rounded-t-2xl p-6">
+                        <h3 class="text-xl font-bold">Difficile</h3>
+                    </div>
+                    <div class="bg-white rounded-b-2xl p-6 shadow-lg">
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-bolt text-orange-500 mt-1"></i>
+                                <span class="text-sm">Haute altitude</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-triangle-exclamation text-orange-600 mt-1"></i>
+                                <span class="text-sm">Passages exposés</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-shield text-orange-700 mt-1"></i>
+                                <span class="text-sm">Équipement spécialisé</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-person-circle-check text-orange-500 mt-1"></i>
+                                <span class="text-sm">Guide recommandé</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Niveau 5 Features -->
+                <div class="level-feature">
+                    <div class="bg-red-600 text-white rounded-t-2xl p-6">
+                        <h3 class="text-xl font-bold">Expert</h3>
+                    </div>
+                    <div class="bg-white rounded-b-2xl p-6 shadow-lg">
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-crown text-red-600 mt-1"></i>
+                                <span class="text-sm">Alpinisme technique</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-skull text-red-700 mt-1"></i>
+                                <span class="text-sm">Risques élevés</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-rope text-red-600 mt-1"></i>
+                                <span class="text-sm">Escalade, rappel</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-medal text-red-600 mt-1"></i>
+                                <span class="text-sm">Guide obligatoire</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-dark mb-12 text-center">Choisir Votre Niveau : Guide Pratique</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-brand-sand rounded-2xl p-8 shadow-lg">
+                    <div class="w-12 h-12 bg-brand-orange rounded-full flex items-center justify-center text-white text-2xl mb-6">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-4">Évaluez Votre Condition</h3>
+                    <ul class="space-y-3 text-gray-700 text-sm">
+                        <li><strong>Sédentaire :</strong> Niveaux 1-2</li>
+                        <li><strong>Sportif régulier :</strong> Niveaux 2-3</li>
+                        <li><strong>Très actif :</strong> Niveaux 3-4</li>
+                        <li><strong>Athlète confirmé :</strong> Niveaux 4-5</li>
+                    </ul>
+                </div>
+
+                <div class="bg-brand-sand rounded-2xl p-8 shadow-lg">
+                    <div class="w-12 h-12 bg-brand-orange rounded-full flex items-center justify-center text-white text-2xl mb-6">
+                        <i class="fa-solid fa-map"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-4">Évaluez Votre Expérience</h3>
+                    <ul class="space-y-3 text-gray-700 text-sm">
+                        <li><strong>Jamais randonnée :</strong> Niveau 1</li>
+                        <li><strong>Quelques sorties :</strong> Niveaux 2-3</li>
+                        <li><strong>Randonnée régulière :</strong> Niveaux 3-4</li>
+                        <li><strong>Montagne régulière :</strong> Niveaux 4-5</li>
+                    </ul>
+                </div>
+
+                <div class="bg-brand-sand rounded-2xl p-8 shadow-lg">
+                    <div class="w-12 h-12 bg-brand-orange rounded-full flex items-center justify-center text-white text-2xl mb-6">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-brand-dark mb-4">Points de Vérification</h3>
+                    <ul class="space-y-3 text-gray-700 text-sm">
+                        <li><strong>✓</strong> Avez-vous l'équipement ?</li>
+                        <li><strong>✓</strong> Avez-vous la forma physique ?</li>
+                        <li><strong>✓</strong> Avez-vous un guide ?</li>
+                        <li><strong>✓</strong> Les conditions météo ?</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-brand-green text-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-5xl font-serif font-bold mb-6">Vous Hésitez sur Votre Niveau ?</h2>
+                <p class="text-gray-300 mb-8 text-lg">Notre équipe d'experts est là pour vous aider à choisir le niveau parfait pour votre prochaine aventure.</p>
+                <div class="flex flex-col md:flex-row gap-4 justify-center">
+                    <a href="#contact" class="bg-brand-orange hover:bg-orange-700 text-white px-8 py-4 rounded-full font-bold transition shadow-lg transform hover:scale-105">
+                        <i class="fa-solid fa-envelope mr-2"></i> Nous Contacter
+                    </a>
+                    <a href="./" class="border-2 border-white hover:bg-white hover:text-brand-green text-white px-8 py-4 rounded-full font-bold transition">
+                        <i class="fa-solid fa-home mr-2"></i> Retour à l'Accueil
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-brand-dark text-white pt-20 pb-10 border-t border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-1 footer-col opacity-0">
+                    <a href="#" class="text-2xl font-serif font-bold text-white tracking-wider flex items-center gap-2 mb-6">
+                        <i class="fa-solid fa-mountain-sun text-brand-orange"></i> TerraTrek
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Agence de randonnée premium spécialisée dans les expériences authentiques et durables à travers le monde.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-orange transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-orange transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-orange transition"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col opacity-0">
+                    <h4 class="text-lg font-bold mb-6 text-brand-sand">Explorer</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-brand-orange transition">Nos Destinations</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Guides Experts</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Niveaux de Difficulté</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Blog Aventure</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col opacity-0">
+                    <h4 class="text-lg font-bold mb-6 text-brand-sand">Entreprise</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-brand-orange transition">À Propos</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Carrières</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Presse</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col opacity-0">
+                    <h4 class="text-lg font-bold mb-6 text-brand-sand">Contact</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot mt-1 text-brand-orange"></i>
+                            <span>123 Avenue des Cimes,<br>74400 Chamonix, France</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-brand-orange"></i>
+                            <span>+33 4 50 50 50 50</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-brand-orange"></i>
+                            <span>bonjour@terratrek.fr</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+                <p>© 2025 TerraTrek. Tous droits réservés.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition">Mentions Légales</a>
+                    <a href="#" class="hover:text-white transition">Confidentialité</a>
+                    <a href="#" class="hover:text-white transition">CGV</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 1s ease-out forwards;
+        }
+    </style>
+
+    <script>
+        const nav = document.getElementById('navbar');
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.remove('bg-transparent', 'py-4');
+                nav.classList.add('bg-brand-dark/90', 'backdrop-blur-md', 'py-2', 'shadow-lg');
+            } else {
+                nav.classList.add('bg-transparent', 'py-4');
+                nav.classList.remove('bg-brand-dark/90', 'backdrop-blur-md', 'py-2', 'shadow-lg');
+            }
+        });
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            const icon = btn.querySelector('i');
+            if (menu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+                gsap.fromTo("#mobile-menu", {scaleY: 0, opacity: 0}, {scaleY: 1, opacity: 1, duration: 0.3, ease: "power2.out"});
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const heroTl = gsap.timeline();
+            
+            heroTl.to("#scroll-indicator", {
+                y: 10,
+                autoAlpha: 1,
+                duration: 1,
+                yoyo: true,
+                repeat: -1,
+                ease: "power1.inOut"
+            }, 2);
+
+            gsap.utils.toArray(".difficulty-card").forEach((card, i) => {
+                gsap.fromTo(card, 
+                    { y: 100, autoAlpha: 0 },
+                    { 
+                        y: 0, 
+                        autoAlpha: 1, 
+                        duration: 0.8,
+                        delay: i * 0.1,
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top 80%",
+                            end: "top 40%",
+                            scrub: 1,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+
+            gsap.utils.toArray(".comparison-row").forEach((row, i) => {
+                gsap.fromTo(row, 
+                    { x: -50, autoAlpha: 0 },
+                    { 
+                        x: 0, 
+                        autoAlpha: 1, 
+                        duration: 0.6,
+                        scrollTrigger: {
+                            trigger: row,
+                            start: "top 85%",
+                            end: "top 55%",
+                            scrub: 1,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+
+            gsap.utils.toArray(".level-feature").forEach((item, i) => {
+                gsap.fromTo(item,
+                    { scale: 0.9, autoAlpha: 0, y: 50 },
+                    {
+                        scale: 1,
+                        autoAlpha: 1,
+                        y: 0,
+                        duration: 0.8,
+                        delay: i * 0.1,
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 85%",
+                            end: "top 45%",
+                            scrub: 1.2,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+
+            gsap.utils.toArray(".footer-col").forEach((col, i) => {
+                gsap.fromTo(col,
+                    { autoAlpha: 0, y: 30 },
+                    {
+                        autoAlpha: 1,
+                        y: 0,
+                        duration: 0.8,
+                        scrollTrigger: {
+                            trigger: col,
+                            start: "top 90%",
+                            end: "top 60%",
+                            scrub: 1,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+        });
+    </script>
+</body>
+</html>
