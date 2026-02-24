@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GR20 Corse - TerraTrek</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#1a2e26',
+                            green: '#2d4a3e',
+                            sage: '#8f9e8a',
+                            sand: '#e6dfd3',
+                            orange: '#d97706'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e6dfd3;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d4a3e;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1a2e26;
+        }
+        
+        .gsap-reveal, .gsap-hero-el, .stage-card, .photo-item, .feature-box {
+            visibility: hidden;
+        }
+    </style>
+    <meta name="description" content="TerraTrek - L'Aventure en Pleine Nature">
+</head>
+<body class="bg-brand-sand text-brand-dark font-sans antialiased selection:bg-brand-orange selection:text-white overflow-x-hidden">
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="./" class="text-2xl font-serif font-bold text-white tracking-wider flex items-center gap-2" data-index-id="692632c212ede531b2821c4d" id="index-link">
+                <i class="fa-solid fa-mountain-sun"></i> TerraTrek
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="./#destinations" class="nav-link text-white/90 hover:text-brand-orange transition font-medium">Destinations</a>
+                <a href="./#experiences" class="nav-link text-white/90 hover:text-brand-orange transition font-medium">Expériences</a>
+                <a href="./#guides" class="nav-link text-white/90 hover:text-brand-orange transition font-medium">Guides</a>
+                <a href="./#blog" class="nav-link text-white/90 hover:text-brand-orange transition font-medium">Journal</a>
+                <a href="#contact" class="bg-brand-orange hover:bg-orange-700 text-white px-6 py-2 rounded-full font-semibold transition shadow-lg transform hover:scale-105">
+                    Réserver
+                </a>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden text-white text-2xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-brand-dark/95 backdrop-blur-md p-6 md:hidden shadow-xl origin-top">
+            <div class="flex flex-col space-y-4">
+                <a href="./#destinations" class="text-white hover:text-brand-orange">Destinations</a>
+                <a href="./#experiences" class="text-white hover:text-brand-orange">Expériences</a>
+                <a href="./#guides" class="text-white hover:text-brand-orange">Guides</a>
+                <a href="#contact" class="bg-brand-orange text-center text-white py-3 rounded-lg">Réserver</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img id="hero-bg" src="https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w2MjU1MDF8MHwxfHNlYXJjaHwzfHxtb3VudGFpbnxlbnwwfDF8fHwxNzY0MTExNTY5fDA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080" alt="GR20 Corse" class="w-full h-full object-cover scale-110">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-brand-sand"></div>
+        </div>
+
+        <div class="relative z-10 container mx-auto px-6 text-center text-white mt-16">
+            <span class="gsap-hero-el inline-block py-1 px-3 border border-white/30 rounded-full text-sm uppercase tracking-widest mb-4">
+                Sentier Légendaire
+            </span>
+            <h1 class="gsap-hero-el text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 leading-tight">
+                GR20 <br><span class="text-brand-orange italic">Corse</span>
+            </h1>
+            <p class="gsap-hero-el text-lg md:text-xl text-gray-200 max-w-2xl mx-auto mb-10">
+                Le sentier le plus mythique d'Europe. Traversez l'île de beauté du nord au sud en 15 jours inoubliables. 180 km de pure aventure entre sommets et vallées secrètes.
+            </p>
+            <div class="gsap-hero-el flex flex-col md:flex-row gap-4 justify-center">
+                <a href="#contact" class="bg-brand-orange hover:bg-orange-700 text-white px-8 py-4 rounded-full font-bold transition shadow-lg hover:shadow-orange-500/30 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-calendar"></i> Réserver maintenant
+                </a>
+                <a href="#details" class="bg-white/10 backdrop-blur-sm border border-white/30 hover:bg-white/20 text-white px-8 py-4 rounded-full font-bold transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-arrow-down"></i> Voir les détails
+                </a>
+            </div>
+        </div>
+
+        <div id="scroll-indicator" class="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-brand-dark opacity-0">
+            <i class="fa-solid fa-arrow-down text-2xl"></i>
+        </div>
+    </header>
+
+    <section class="bg-brand-green text-white py-12 -mt-2 relative z-20 rounded-t-3xl md:rounded-none shadow-2xl">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/10">
+                <div class="p-2">
+                    <div class="text-4xl font-bold text-brand-orange mb-1">15</div>
+                    <div class="text-sm text-gray-300 uppercase tracking-wide">Jours d'Aventure</div>
+                </div>
+                <div class="p-2">
+                    <div class="text-4xl font-bold text-brand-orange mb-1">180</div>
+                    <div class="text-sm text-gray-300 uppercase tracking-wide">Kilomètres</div>
+                </div>
+                <div class="p-2">
+                    <div class="text-4xl font-bold text-brand-orange mb-1">8</div>
+                    <div class="text-sm text-gray-300 uppercase tracking-wide">Max par Groupe</div>
+                </div>
+                <div class="p-2">
+                    <div class="text-4xl font-bold text-brand-orange mb-1">Expert</div>
+                    <div class="text-sm text-gray-300 uppercase tracking-wide">Niveau</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="details" class="py-20 bg-brand-sand">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <div class="gsap-reveal mb-12">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-brand-dark mb-6">L'Expérience GR20</h2>
+                    <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                        Le GR20 est bien plus qu'une randonnée : c'est une quête initiatique à travers le cœur sauvage de la Corse. Pendant 15 jours, vous progresserez de refuge en refuge, traversant des paysages d'une beauté brute et authentique, des plus hauts sommets corses aux vallées verdoyantes.
+                    </p>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        Ce sentier de légende porte en lui l'essence même de l'aventure : des défis physiques, des panoramas époustouflants et des rencontres humaines inoubliables. C'est une expérience transformatrice pour ceux qui osent la relever.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <div class="feature-box bg-white rounded-2xl p-8 shadow-md hover:shadow-lg transition">
+                        <div class="text-4xl text-brand-orange mb-4"><i class="fa-solid fa-mountain"></i></div>
+                        <h3 class="text-xl font-bold text-brand-dark mb-3">Sommets Emblématiques</h3>
+                        <p class="text-gray-600">Pic de la Paglia Orba, Monte Cinto, Punta Minuta... des sommets qui marquent à jamais les randonneurs.</p>
+                    </div>
+
+                    <div class="feature-box bg-white rounded-2xl p-8 shadow-md hover:shadow-lg transition">
+                        <div class="text-4xl text-brand-orange mb-4"><i class="fa-solid fa-house-chimney"></i></div>
+                        <h3 class="text-xl font-bold text-brand-dark mb-3">Refuges Authentiques</h3>
+                        <p class="text-gray-600">Nuits dans les refuges gardés du GR20 avec repas traditionnels corses et atmosphère conviviale.</p>
+                    </div>
+
+                    <div class="feature-box bg-white rounded-2xl p-8 shadow-md hover:shadow-lg transition">
+                        <div class="text-4xl text-brand-orange mb-4"><i class="fa-solid fa-person-hiking"></i></div>
+                        <h3 class="text-xl font-bold text-brand-dark mb-3">Guide Expert</h3>
+                        <p class="text-gray-600">Un guide certifié connaissant chaque pierre du sentier, partageant anecdotes et secrets du GR20.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto mb-16">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-brand-dark mb-12 gsap-reveal text-center">Les Étapes du Parcours</h2>
+            </div>
+
+            <div class="max-w-4xl mx-auto space-y-8">
+                <div class="stage-card bg-brand-sand rounded-2xl p-8 border-l-4 border-brand-orange shadow-md hover:shadow-lg transition">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-2xl font-serif font-bold text-brand-dark">Jours 1-3 : De Calenzana à Corte</h3>
+                            <p class="text-gray-600 mt-2">Dénivelé : +2500m / -1800m | Distance : 50 km</p>
+                        </div>
+                        <span class="bg-brand-orange text-white px-4 py-2 rounded-full font-bold text-sm">Difficile</span>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        Départ du refuge de Calenzana en direction du Sgeu d'Oru. Escalade du Pic de la Paglia Orba (2210m) avec ses fameuses brèches et chaînes. Paysages alpins spectaculaires avec vue sur le golfe de Galeria.
+                    </p>
+                </div>
+
+                <div class="stage-card bg-brand-sand rounded-2xl p-8 border-l-4 border-brand-green shadow-md hover:shadow-lg transition">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-2xl font-serif font-bold text-brand-dark">Jours 4-6 : Corte à Vizzavona</h3>
+                            <p class="text-gray-600 mt-2">Dénivelé : +2200m / -2100m | Distance : 45 km</p>
+                        </div>
+                        <span class="bg-brand-orange text-white px-4 py-2 rounded-full font-bold text-sm">Expert</span>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        Cœur du massif avec Monte Cinto (2706m), le plus haut sommet de Corse. Traversée de paysages lunaires avec lacs glaciaires. Passage au refuge de Manganu offrant des vues incomparables sur les deux versants de l'île.
+                    </p>
+                </div>
+
+                <div class="stage-card bg-brand-sand rounded-2xl p-8 border-l-4 border-brand-orange shadow-md hover:shadow-lg transition">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-2xl font-serif font-bold text-brand-dark">Jours 7-9 : Vizzavona à Capanelle</h3>
+                            <p class="text-gray-600 mt-2">Dénivelé : +1900m / -2000m | Distance : 38 km</p>
+                        </div>
+                        <span class="bg-brand-green text-white px-4 py-2 rounded-full font-bold text-sm">Difficile</span>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        Descente vers le sud avec des paysages plus méditerranéens. Passage par le refuge de Prati avec ses forêts de pins laricio. Approche progressive du versant sud avec ses châtaigniers et villages traditionnels.
+                    </p>
+                </div>
+
+                <div class="stage-card bg-brand-sand rounded-2xl p-8 border-l-4 border-brand-green shadow-md hover:shadow-lg transition">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-2xl font-serif font-bold text-brand-dark">Jours 10-15 : Capanelle à Conca</h3>
+                            <p class="text-gray-600 mt-2">Dénivelé : +1800m / -2200m | Distance : 47 km</p>
+                        </div>
+                        <span class="bg-brand-orange text-white px-4 py-2 rounded-full font-bold text-sm">Difficile</span>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed">
+                        Finale épique avec Punta Minuta (2556m) et Punta di Capanella (1930m). Descente vertigineuse vers Conca et la mer. Les derniers jours récompensent tous vos efforts avec des vues méditerranéennes inoubliables et l'arrivée glorieuse au bord de la plage.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-brand-dark text-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto mb-16">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-12 gsap-reveal text-center">Galerie du GR20</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div class="photo-item group relative overflow-hidden rounded-2xl h-80 shadow-lg cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;w=600" alt="Sommet GR20" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-300"></div>
+                    <p class="absolute bottom-4 left-4 text-white font-bold text-lg">Panoramas Alpins</p>
+                </div>
+
+                <div class="photo-item group relative overflow-hidden rounded-2xl h-80 shadow-lg cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;w=600" alt="Refuge GR20" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-300"></div>
+                    <p class="absolute bottom-4 left-4 text-white font-bold text-lg">Refuges Montagne</p>
+                </div>
+
+                <div class="photo-item group relative overflow-hidden rounded-2xl h-80 shadow-lg cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1487730116645-74489c95b41b?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;w=600" alt="Coucher soleil GR20" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition duration-300"></div>
+                    <p class="absolute bottom-4 left-4 text-white font-bold text-lg">Couchers Soleil</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-brand-sand">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-brand-dark mb-12 gsap-reveal text-center">Ce qui est Inclus</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white rounded-2xl p-8 shadow-md">
+                        <h3 class="text-xl font-bold text-brand-dark mb-6 flex items-center gap-3">
+                            <i class="fa-solid fa-check text-brand-orange text-2xl"></i> Inclusions
+                        </h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex gap-3"><i class="fa-solid fa-chevron-right text-brand-orange mt-1"></i> Guide de montagne professionnel</li>
+                            <li class="flex gap-3"><i class="fa-solid fa-chevron-right text-brand-orange mt-1"></i> Nuits en refuges (demi-pension)</li>
+                            <li class="flex gap-3"><i class="fa-solid fa-chevron-right text-brand-orange mt-1"></i> Équipement complet de camping</li>
+                            <li class="flex gap-3"><i class="fa-solid fa-chevron-right text-brand-orange mt-1"></i> Repas du soir et petit-déjeuner</li>
+                            <li class="flex gap-3"><i class="fa-solid fa-chevron-right text-brand-orange mt-1"></i> Assistance en montagne 24h/24</li>
+                            <li class="flex gap-3"><i class="fa-solid fa-chevron-right text-brand-orange mt-1"></i> Assurance montagne</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-8 shadow-md">
+                        <h3 class="text-xl font-bold text-brand-dark mb-6 flex items-center gap-3">
+                            <i class="fa-solid fa-xmark text-gray-400 text-2xl"></i> Non Inclus
+                        </h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex gap-3"><i class="fa-solid fa-chevron-right text-gray-400 mt-1"></i> Vols et transport</li>
+                            <li class="flex gap-3"><i class="fa-solid fa-chevron-right text-gray-400 mt-1"></i> Repas du midi (pique-nique)</li>
+                            <li class="flex gap-3"><i class="fa-solid fa-chevron-right text-gray-400 mt-1"></i> Boissons alcoolisées</li>
+                            <li class="flex gap-3"><i class="fa-solid fa-chevron-right text-gray-400 mt-1"></i> Équipement personnel (chaussures, vêtements)</li>
+                            <li class="flex gap-3"><i class="fa-solid fa-chevron-right text-gray-400 mt-1"></i> Activités additionnelles</li>
+                            <li class="flex gap-3"><i class="fa-solid fa-chevron-right text-gray-400 mt-1"></i> Dépenses personnelles</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-brand-dark mb-12 gsap-reveal text-center">Informations Pratiques</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-brand-sand rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-brand-dark mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-calendar text-brand-orange"></i> Périodes
+                        </h3>
+                        <p class="text-gray-700 mb-4">
+                            <strong>Meilleure saison :</strong> Juin à septembre<br>
+                            <strong>Juin-juillet :</strong> Meilleures conditions, groupes importants<br>
+                            <strong>Août :</strong> Plus chaud, routes touristiques chargées<br>
+                            <strong>Septembre :</strong> Idéal, foules moins importantes
+                        </p>
+                    </div>
+
+                    <div class="bg-brand-sand rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-brand-dark mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-person-hiking text-brand-orange"></i> Niveau Requis
+                        </h3>
+                        <p class="text-gray-700 mb-4">
+                            <strong>Condition physique :</strong> Excellente<br>
+                            <strong>Expérience :</strong> Au moins 3-4 randos de plusieurs jours<br>
+                            <strong>Acclimatation :</strong> Important avant d'arriver
+                        </p>
+                    </div>
+
+                    <div class="bg-brand-sand rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-brand-dark mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-backpack text-brand-orange"></i> Équipement Essentiel
+                        </h3>
+                        <p class="text-gray-700 mb-4">
+                            Chaussures de montagne robustes, vêtements multicouches, sac à dos 30-40L, protection solaire, gourde réutilisable
+                        </p>
+                    </div>
+
+                    <div class="bg-brand-sand rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold text-brand-dark mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-euro-sign text-brand-orange"></i> Tarifs
+                        </h3>
+                        <p class="text-gray-700 mb-4">
+                            <strong>2495 €</strong> par personne<br>
+                            Groupes de 4-8 personnes<br>
+                            Réductions groupe à partir de 6 personnes
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-20 bg-brand-green text-white">
+        <div class="container mx-auto px-6">
+            <div class="max-w-2xl mx-auto text-center mb-12 gsap-reveal">
+                <h2 class="text-4xl md:text-5xl font-serif font-bold mb-4">Prêt à Relever le Défi ?</h2>
+                <p class="text-xl text-gray-200">Rejoignez nos prochains groupes et vivez l'expérience du GR20. Places limitées pour préserver l'authenticité.</p>
+            </div>
+
+            <div class="max-w-2xl mx-auto bg-brand-dark rounded-3xl p-10 shadow-2xl">
+                <form class="space-y-6" onsubmit="event.preventDefault();">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <input type="text" placeholder="Votre nom" class="px-6 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:bg-white/20 focus:border-brand-orange transition">
+                        <input type="email" placeholder="Votre email" class="px-6 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:bg-white/20 focus:border-brand-orange transition">
+                    </div>
+                    <input type="tel" placeholder="Téléphone" class="w-full px-6 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:bg-white/20 focus:border-brand-orange transition">
+                    <select class="w-full px-6 py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:bg-white/20 focus:border-brand-orange transition">
+                        <option class="bg-brand-dark text-white">Choisissez une période</option>
+                        <option class="bg-brand-dark text-white">Juin 2025</option>
+                        <option class="bg-brand-dark text-white">Juillet 2025</option>
+                        <option class="bg-brand-dark text-white">Août 2025</option>
+                        <option class="bg-brand-dark text-white">Septembre 2025</option>
+                    </select>
+                    <textarea placeholder="Message et questions spéciales" class="w-full px-6 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:bg-white/20 focus:border-brand-orange transition" rows="5"></textarea>
+                    <button type="submit" class="w-full bg-brand-orange hover:bg-orange-700 text-white px-8 py-4 rounded-lg font-bold shadow-lg transition transform hover:scale-105">
+                        Envoyer ma Demande
+                    </button>
+                </form>
+                <p class="text-center text-gray-400 text-sm mt-6">Nous vous répondrons dans les 24 heures.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-brand-dark text-white pt-20 pb-10 border-t border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-1 footer-col opacity-0">
+                    <a href="./" class="text-2xl font-serif font-bold text-white tracking-wider flex items-center gap-2 mb-6">
+                        <i class="fa-solid fa-mountain-sun text-brand-orange"></i> TerraTrek
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Agence de randonnée premium spécialisée dans les expériences authentiques et durables à travers le monde.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-orange transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-orange transition"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-brand-orange transition"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col opacity-0">
+                    <h4 class="text-lg font-bold mb-6 text-brand-sand">Explorer</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="./#destinations" class="hover:text-brand-orange transition">Nos Destinations</a></li>
+                        <li><a href="./#experiences" class="hover:text-brand-orange transition">Guides Experts</a></li>
+                        <li><a href="./" class="hover:text-brand-orange transition">Tous les GR</a></li>
+                        <li><a href="./#blog" class="hover:text-brand-orange transition">Blog Aventure</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col opacity-0">
+                    <h4 class="text-lg font-bold mb-6 text-brand-sand">Entreprise</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-brand-orange transition">À Propos</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Carrières</a></li>
+                        <li><a href="#" class="hover:text-brand-orange transition">Presse</a></li>
+                        <li><a href="#contact" class="hover:text-brand-orange transition">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col opacity-0">
+                    <h4 class="text-lg font-bold mb-6 text-brand-sand">Contact</h4>
+                    <ul class="space-y-4 text-gray-400 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot mt-1 text-brand-orange"></i>
+                            <span>123 Avenue des Cimes,<br>74400 Chamonix, France</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-brand-orange"></i>
+                            <span>+33 4 50 50 50 50</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-brand-orange"></i>
+                            <span>bonjour@terratrek.fr</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
+                <p>© 2025 TerraTrek. Tous droits réservés.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition">Mentions Légales</a>
+                    <a href="#" class="hover:text-white transition">Confidentialité</a>
+                    <a href="#" class="hover:text-white transition">CGV</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const nav = document.getElementById('navbar');
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.remove('bg-transparent', 'py-4');
+                nav.classList.add('bg-brand-dark/90', 'backdrop-blur-md', 'py-2', 'shadow-lg');
+            } else {
+                nav.classList.add('bg-transparent', 'py-4');
+                nav.classList.remove('bg-brand-dark/90', 'backdrop-blur-md', 'py-2', 'shadow-lg');
+            }
+        });
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+            const icon = btn.querySelector('i');
+            if (menu.classList.contains('hidden')) {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+                gsap.fromTo("#mobile-menu", {scaleY: 0, opacity: 0}, {scaleY: 1, opacity: 1, duration: 0.3, ease: "power2.out"});
+            }
+        });
+
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            const heroTl = gsap.timeline();
+            
+            heroTl.to("#hero-bg", {
+                scale: 1,
+                duration: 10,
+                ease: "power1.inOut"
+            }, 0);
+
+            heroTl.fromTo(".gsap-hero-el", 
+                { y: 50, autoAlpha: 0 },
+                { y: 0, autoAlpha: 1, duration: 1, stagger: 0.2, ease: "power3.out" },
+                0.5
+            );
+
+            heroTl.to("#scroll-indicator", {
+                y: 10,
+                autoAlpha: 1,
+                duration: 1,
+                yoyo: true,
+                repeat: -1,
+                ease: "power1.inOut"
+            }, 2);
+
+            gsap.to("#hero-bg", {
+                yPercent: 30,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "header",
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+
+            gsap.utils.toArray(".gsap-reveal").forEach((el) => {
+                gsap.fromTo(el, 
+                    { y: 30, autoAlpha: 0 },
+                    { 
+                        y: 0, 
+                        autoAlpha: 1, 
+                        duration: 0.8,
+                        scrollTrigger: { 
+                            trigger: el, 
+                            start: "top 75%",
+                            end: "top 40%",
+                            scrub: 1,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+
+            gsap.utils.toArray(".stage-card").forEach((card) => {
+                gsap.fromTo(card, 
+                    { x: -50, autoAlpha: 0 },
+                    { 
+                        x: 0, 
+                        autoAlpha: 1, 
+                        duration: 0.8,
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top 80%",
+                            end: "top 40%",
+                            scrub: 1,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+
+            gsap.utils.toArray(".photo-item").forEach((item) => {
+                gsap.fromTo(item, 
+                    { scale: 0.9, autoAlpha: 0 },
+                    { 
+                        scale: 1, 
+                        autoAlpha: 1, 
+                        duration: 0.8,
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 85%",
+                            end: "top 45%",
+                            scrub: 1,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+
+            gsap.utils.toArray(".feature-box").forEach((item) => {
+                gsap.fromTo(item,
+                    { scale: 0.9, autoAlpha: 0, y: 30 },
+                    {
+                        scale: 1,
+                        autoAlpha: 1,
+                        y: 0,
+                        duration: 0.8,
+                        scrollTrigger: {
+                            trigger: item,
+                            start: "top 85%",
+                            end: "top 45%",
+                            scrub: 1,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+
+            gsap.utils.toArray(".footer-col").forEach((col) => {
+                gsap.fromTo(col,
+                    { autoAlpha: 0, y: 30 },
+                    {
+                        autoAlpha: 1,
+                        y: 0,
+                        duration: 0.8,
+                        scrollTrigger: {
+                            trigger: col,
+                            start: "top 90%",
+                            end: "top 60%",
+                            scrub: 1,
+                            toggleActions: "play reverse play reverse"
+                        }
+                    }
+                );
+            });
+        });
+    </script>
+</body>
+</html>
